@@ -114,7 +114,7 @@
     h+='</div><p class="cnote">'+(c.asof?esc(M(id,'asof',c.asof))+'. ':'')+L('Showing 5 of '+R.length+' coverages.','معروض 5 من '+R.length+' تغطية.')+'</p></section>';
     h+='<nav class="cnav" aria-label="More campaigns"><a href="#c-'+prev+'" data-r><span>'+L('← Previous','→ السابق')+'</span><b>'+esc((CAMP[prev]||UGC[prev]).n.toUpperCase())+'</b></a><a href="#c-'+next+'" data-r><span>'+L('Next →','التالي ←')+'</span><b>'+esc((CAMP[next]||UGC[next]).n.toUpperCase())+'</b></a></nav>';
     var box=document.getElementById('camp'); box.innerHTML=h; fixLinks(box);
-    document.title=c.n+' · '+L('Trenova Agency','ترينوفا إيجنسي');
+    document.title=c.n+' · '+L('Trenova Agency','منصة ترينوفا');
   }
 
 
@@ -130,10 +130,10 @@
     var h='<a class="back" href="#work" data-r>'+L('← Our campaigns','→ حملاتنا')+'</a>';
     h+='<header class="chero rise"><img class="big-lg" src="'+logo+'" alt="'+esc(c.n)+' logo" width="112" height="112"><div><span class="cat">'+esc(M(id,'cat',c.cat))+'</span><h1>'+esc(c.n.toUpperCase())+'</h1><p class="per">'+esc(M(id,'period',c.period))+'</p></div><a class="blink" href="'+c.link+'" target="_blank" rel="noopener">'+esc(c.link.replace(/^https?:\/\/(www\.)?/,''))+' ↗</a></header>';
     h+='<div class="ckpi">'+[[CR.length,L('Creators','كريتورز')],[V.length,L('Videos delivered','فيديو تم تسليمه')],[(tot/60).toFixed(1),L('Minutes of content','دقيقة محتوى')],[Math.round(tot/V.length)+L('s',' ث'),L('Average length','متوسط مدة الفيديو')],[ig,L('Instagram creators','كريتورز إنستقرام')],[tt,L('TikTok creators','كريتورز تيك توك')]].map(function(x,j){return '<div class="rise d'+Math.min(4,j)+'"><strong>'+x[0]+'</strong><span>'+x[1]+'</span></div>'}).join('')+'</div>';
-    h+='<div class="ugc-note rise d2"><div class="ic"><svg viewBox="0 0 24 24"><path d="M15 10l5-3v10l-5-3z"/><rect x="3" y="6" width="12" height="12" rx="2"/></svg></div><p>'+L('<b>UGC, no posting.</b> Creators filmed product videos for Evan Coffee to use on its own accounts and in ads. Nothing went up on the creators\' pages, so this campaign is measured by the content delivered, not by views.','<b>UGC، بدون نشر.</b> صوّر صنّاع المحتوى فيديوهات للمنتج لتستخدمها Evan Coffee في حساباتها وإعلاناتها. لم يُنشر شيء على صفحاتهم، لذا تُقاس الحملة بالمحتوى المُسلَّم لا بالمشاهدات.')+'</p></div>';
+    h+='<div class="ugc-note rise d2"><div class="ic"><svg viewBox="0 0 24 24"><path d="M15 10l5-3v10l-5-3z"/><rect x="3" y="6" width="12" height="12" rx="2"/></svg></div><p>'+L('<b>UGC, no posting.</b> Creators filmed product videos for Evan Coffee to use on its own accounts and in ads. Nothing went up on the creators\' pages, so this campaign is measured by the content delivered, not by views.','<b>UGC، بدون نشر.</b> صوّر صنّاع المحتوى فيديوهات للمنتج عشان تستخدمها Evan Coffee في حساباتها وإعلاناتها. ما نُشر شي في صفحاتهم، ولهذا تنقاس الحملة بالمحتوى المسلَّم مو بالمشاهدات.')+'</p></div>';
     h+='<section class="tops5"><div class="t5head rise"><span class="kicker">'+L('The videos','الفيديوهات')+'</span><h3>'+L('WATCH THE <span class="red">CONTENT</span>','شوف <span class="red">المحتوى</span>')+'</h3><p>'+L('Tap any video to watch it with sound.','اضغط على أي فيديو لمشاهدته بالصوت.')+'</p></div><div class="vwall">';
     V.forEach(function(v,j){ h+='<div class="vt" role="button" tabindex="0" data-i="'+j+'" aria-label="Play video '+(j+1)+'"><img src="'+v.p+'" alt="Evan Coffee UGC video '+(j+1)+'" loading="lazy" decoding="async"><span class="pl"><svg viewBox="0 0 24 24"><path d="M7 4.5v15l13-7.5z"/></svg></span><span class="vn">#'+(j+1)+'</span><span class="vd">0:'+String(Math.round(v.d)).padStart(2,'0')+'</span><div class="vw"><span>'+(v.who?'@'+esc(v.who):'Evan Coffee UGC')+'</span><span class="snd"><svg viewBox="0 0 24 24"><path d="M4 9v6h4l5 4V5L8 9z"/><path d="M16 9a4 4 0 0 1 0 6"/></svg></span></div></div>' });
-    h+='<a class="vt vcta" href="https://wa.me/966511460554?text='+encodeURIComponent(L('Hi Trenova, I want UGC videos like the Evan Coffee campaign for my brand.','مرحبًا فريق ترينوفا، نرغب في فيديوهات UGC مماثلة لحملة Evan Coffee لعلامتنا.'))+'" target="_blank" rel="noopener"><span class="kicker">'+L('Your brand next?','علامتك التالية؟')+'</span><b>'+L('WANT CONTENT LIKE THIS?','هل ترغب بمحتوى مماثل؟')+'</b><span class="vc-b">'+L('Chat on WhatsApp →','تواصل عبر واتساب ←')+'</span></a>';
+    h+='<a class="vt vcta" href="https://wa.me/966511460554?text='+encodeURIComponent(L('Hi Trenova, I want UGC videos like the Evan Coffee campaign for my brand.','السلام عليكم فريق ترينوفا، نبي فيديوهات UGC مثل حملة Evan Coffee لعلامتنا.'))+'" target="_blank" rel="noopener"><span class="kicker">'+L('Your brand next?','دورك الجاي؟')+'</span><b>'+L('WANT CONTENT LIKE THIS?','تبي محتوى مثله؟')+'</b><span class="vc-b">'+L('Chat on WhatsApp →','تواصل عبر واتساب ←')+'</span></a>';
     h+='</div></section>';
     h+='<section class="tops5"><div class="t5head rise"><span class="kicker">'+L('The creators','الكريتورز')+'</span><h3>'+L('WHO MADE <span class="red">IT</span>','مين <span class="red">صنعه</span>')+'</h3></div><div class="crgrid">'+CR.map(function(x){return '<a class="crc '+(x.pf==='TikTok'?'tt':'ig')+'" href="'+esc(x.u)+'" target="_blank" rel="noopener"><b>@'+esc(x.h)+'</b><span>'+tw(x.pf)+' ↗</span></a>'}).join('')+'</div></section>';
     h+='<nav class="cnav" aria-label="More campaigns"><a href="#c-'+prev+'" data-r><span>'+L('← Previous','→ السابق')+'</span><b>'+nm(prev)+'</b></a><a href="#c-'+next+'" data-r><span>'+L('Next →','التالي ←')+'</span><b>'+nm(next)+'</b></a></nav>';
@@ -141,7 +141,7 @@
     lbList=V;
     box.querySelectorAll('.vt').forEach(function(t){ var open=function(){ openLB(+t.dataset.i) }; t.addEventListener('click',open); t.addEventListener('keydown',function(e){ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); open() } }) });
     autoPlay(box);
-    document.title=c.n+' · '+L('Trenova Agency','ترينوفا إيجنسي');
+    document.title=c.n+' · '+L('Trenova Agency','منصة ترينوفا');
   }
   function autoPlay(root){
     if(reduce||!window.matchMedia||!matchMedia('(hover:hover) and (pointer:fine)').matches) return;
@@ -174,7 +174,7 @@
     if(/^c-/.test(name)&&window.CAMP&&CAMP[name.slice(2)]){ camp=name.slice(2); renderCamp(camp); name='campaign' }
     else if(/^c-/.test(name)&&window.UGC&&UGC[name.slice(2)]){ camp=name.slice(2); renderUGC(camp); name='campaign' }
     if(!views[name]||name==='campaign'&&!camp) name=document.body.dataset.page||'home';
-    if(!camp) document.title=L('Trenova Agency','ترينوفا إيجنسي')+' · '+(document.body.dataset.label||'Home');
+    if(!camp) document.title=L('Trenova Agency','منصة ترينوفا')+' · '+(document.body.dataset.label||'Home');
     Object.keys(views).forEach(function(k){views[k].hidden=k!==name; views[k].classList.remove('enter')});
     band.hidden=name==='contact';
     document.querySelectorAll('[data-r]').forEach(function(a){ if(a.closest('.menu-inline')) a.setAttribute('aria-current',(a.getAttribute('href')===pageURL(name)||name==='campaign'&&a.getAttribute('href')===pageURL('work'))?'page':'false') });
@@ -279,16 +279,16 @@
     function build(){
       var n=document.getElementById('f-name').value.trim(), br=document.getElementById('f-brand').value.trim(), note=document.getElementById('f-note').value.trim();
       var need=sel('pk-need')[0], pl=sel('pk-plat');
-      var labAr={'a full influencer campaign':'حملة إنفلونسرز كاملة','access to our creator network':'الوصول لشبكة كريتورز','campaign reporting and analytics':'تقارير وتحليلات للحملات','a monthly partnership with a dedicated team':'شراكة شهرية مع فريق مخصص'};
+      var labAr={'a full influencer campaign':'حملة إنفلونسرز كاملة','access to our creator network':'الاستفادة من شبكة كريتورز','campaign reporting and analytics':'تقارير وتحليلات للحملات','a monthly partnership with a dedicated team':'شراكة شهرية مع فريق مخصص'};
       document.getElementById('ans-need').textContent=need?(lang==='ar'?labAr[need]:labels[need]):'';
       document.getElementById('ans-plat').textContent=pl.map(tw).join(' · ');
       var t;
       if(lang==='ar'){
         var pa=pl.map(tw), la=pa.length<2?pa.join(''):pa.slice(0,-1).join('، ')+' و'+pa[pa.length-1];
         t='السلام عليكم فريق ترينوفا'+(n?'، معكم '+n:'')+(br?' من '+br:'')+'.';
-        t+='\nنرغب في '+(need?labAr[need]:'خدمات التسويق بالمؤثرين')+(pa.length?' على '+la:'')+' في السعودية.';
+        t+='\nنبي '+(need?labAr[need]:'خدمات التسويق بالمؤثرين')+(pa.length?' على '+la:'')+' في السعودية.';
         if(note) t+='\n'+note;
-        t+='\nيسعدنا التواصل معكم.';
+        t+='\nننتظر تواصلكم.';
       } else {
       t='Hello Trenova team'+(n?', this is '+n:'')+(br?' from '+br:'')+'.';
       t+='\nWe\'re looking for '+(need||'help with influencer marketing')+(pl.length?' on '+list(pl):'')+' in Saudi Arabia.';
