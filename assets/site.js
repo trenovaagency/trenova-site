@@ -16,12 +16,12 @@
   function tw(x){ return lang==='ar'&&W[x]||x }
   var MA={hlay:{cat:'حلويات وكافيه · الرياض',period:'إطلاق حلاي كرانشي · 27–30 سبتمبر 2026',asof:'الأرقام من تقرير الحملة'},
     binrushd:{cat:'مركز عناية بالعيون · الرياض',period:'يناير 2025 — سبتمبر 2025',group:'الفرع'},
-    lebohneur:{cat:'شوكولاتة بلجيكية',period:'اليوم الوطني السعودي 96 · سبتمبر 2026',asof:'الأرقام لحد 19 أكتوبر 2026'},
+    lebohneur:{cat:'شوكولاتة بلجيكية',period:'اليوم الوطني السعودي 96 · سبتمبر 2026',asof:'الأرقام حتى 19 أكتوبر 2026'},
     'hlana-gher':{cat:'حلويات ومخبوزات',period:'سبتمبر 2025'},
     'beauty-select':{cat:'تجميل وعناية بالشعر',period:'أغسطس 2025 — نوفمبر 2025',group:'نوع الحملة'},
     noya:{cat:'عناية بالشعر',period:'أكتوبر 2025'},fekrat:{cat:'عود وعطور',period:'2025'},neptar:{cat:'عسل طبيعي',period:'2025'},
     evan:{cat:'متجر قهوة مختصة',period:'حملة UGC · مايو 2026'},
-    proleaders:{cat:'معهد تدريب · الرياض وجدة',period:'اليوم الوطني 96 + العام الـ17 · سبتمبر–أكتوبر 2026',asof:'الأرقام لحد 27 أكتوبر 2026',group:'الفرع'},
+    proleaders:{cat:'معهد تدريب · الرياض وجدة',period:'اليوم الوطني 96 + العام الـ17 · سبتمبر–أكتوبر 2026',asof:'الأرقام حتى 27 أكتوبر 2026',group:'الفرع'},
     umandi:{cat:'مطعم تراثي حجازي · جدة',period:'افتتاح المطعم · يوليو–سبتمبر 2025',asof:'الأرقام من تقرير الحملة، وأرقام تيك توك محدّثة يوم 28 أكتوبر 2026'},
     udf:{cat:'ديكور وأثاث · الرياض',period:'حملة المعرض · مارس–مايو 2026',asof:'الأرقام من تقرير الحملة، وأرقام تيك توك محدّثة يوم 28 أكتوبر 2026'},
     zaitia:{cat:'لوحات وديكور منزلي · الرياض',period:'زيارات وتوصيل · مارس–أبريل 2026',asof:'الأرقام من تقرير الحملة، وأرقام تيك توك محدّثة يوم 28 أكتوبر 2026',group:'نوع الحملة'},
@@ -87,7 +87,7 @@
       return '<div class="rise d'+Math.min(4,j)+'"><strong>'+num+'</strong><span>'+x[1]+'</span></div>'}).join('')+'</div>';
     h+='<div class="cgrid2">';
     h+='<section class="panel rise d1"><span class="kicker">'+L('Reach','الوصول')+'</span><h3>'+L('VIEWS BY PLATFORM','المشاهدات حسب المنصة')+'</h3>'+bars(plat.map(function(x){return {lbl:tw(x.k),v:x.v,n:x.n,k:x.k}}),function(x){return K(x.v)+'<small>'+x.n+L(' posts',' بوست')+'</small>'},function(x){return PC[x.k]||'var(--hot)'})+'</section>';
-    h+='<section class="panel rise d2"><span class="kicker">'+L('Engagement','التفاعل')+'</span><h3>'+L('WHERE IT CAME FROM','جه منين')+'</h3><div class="split"><i style="--w:'+(Lk/E*100||0)+'%"></i><i style="--w:'+(Cm/E*100||0)+'%"></i><i style="--w:'+(S/E*100||0)+'%"></i></div><div class="slegend"><span style="--k:var(--hot)"><b>'+K(Lk)+'</b>'+L('Likes','لايكات')+'</span><span style="--k:var(--ink)"><b>'+K(Cm)+'</b>'+L('Comments','كومنتات')+'</span><span style="--k:#FFD400"><b>'+K(S)+'</b>'+L('Shares &amp; saves','شير وحفظ')+'</span></div>'
+    h+='<section class="panel rise d2"><span class="kicker">'+L('Engagement','التفاعل')+'</span><h3>'+L('WHERE IT CAME FROM','من وين جا')+'</h3><div class="split"><i style="--w:'+(Lk/E*100||0)+'%"></i><i style="--w:'+(Cm/E*100||0)+'%"></i><i style="--w:'+(S/E*100||0)+'%"></i></div><div class="slegend"><span style="--k:var(--hot)"><b>'+K(Lk)+'</b>'+L('Likes','لايكات')+'</span><span style="--k:var(--ink)"><b>'+K(Cm)+'</b>'+L('Comments','كومنتات')+'</span><span style="--k:#FFD400"><b>'+K(S)+'</b>'+L('Shares &amp; saves','شير وحفظ')+'</span></div>'
       +(tier.length?'<span class="kicker" style="margin-top:.6rem">'+L('Creator tiers','فئات الكريتورز')+'</span>'+bars(tier.map(function(x){return {lbl:tw(x.k),v:x.w}}),function(x){return x.v+'<small>'+L('creators','كريتور')+'</small>'}):'')+'</section>';
     if(grp.length) h+='<section class="panel wide rise"><span class="kicker">'+esc(M(id,'group',c.group))+'</span><h3>'+L('BY '+esc(c.group.toUpperCase()),'حسب '+esc(M(id,'group',c.group)))+'</h3>'+bars(grp.map(function(x){return {lbl:tw(x.k),v:x.v,n:x.n}}),function(x){return K(x.v)+'<small>'+x.n+L(' posts',' بوست')+'</small>'})+'</section>';
     h+='</div>';
@@ -129,11 +129,11 @@
     function nm(k){ return (CAMP[k]||UGC[k]).n.toUpperCase() }
     var h='<a class="back" href="#work" data-r>'+L('← Our campaigns','→ حملاتنا')+'</a>';
     h+='<header class="chero rise"><img class="big-lg" src="'+logo+'" alt="'+esc(c.n)+' logo" width="112" height="112"><div><span class="cat">'+esc(M(id,'cat',c.cat))+'</span><h1>'+esc(c.n.toUpperCase())+'</h1><p class="per">'+esc(M(id,'period',c.period))+'</p></div><a class="blink" href="'+c.link+'" target="_blank" rel="noopener">'+esc(c.link.replace(/^https?:\/\/(www\.)?/,''))+' ↗</a></header>';
-    h+='<div class="ckpi">'+[[CR.length,L('Creators','كريتورز')],[V.length,L('Videos delivered','فيديو اتسلّم')],[(tot/60).toFixed(1),L('Minutes of content','دقيقة محتوى')],[Math.round(tot/V.length)+L('s',' ث'),L('Average length','متوسط مدة الفيديو')],[ig,L('Instagram creators','كريتورز إنستقرام')],[tt,L('TikTok creators','كريتورز تيك توك')]].map(function(x,j){return '<div class="rise d'+Math.min(4,j)+'"><strong>'+x[0]+'</strong><span>'+x[1]+'</span></div>'}).join('')+'</div>';
-    h+='<div class="ugc-note rise d2"><div class="ic"><svg viewBox="0 0 24 24"><path d="M15 10l5-3v10l-5-3z"/><rect x="3" y="6" width="12" height="12" rx="2"/></svg></div><p>'+L('<b>UGC, no posting.</b> Creators filmed product videos for Evan Coffee to use on its own accounts and in ads. Nothing went up on the creators\' pages, so this campaign is measured by the content delivered, not by views.','<b>UGC، بدون نشر.</b> الكريتورز صوّروا فيديوهات للمنتج عشان Evan Coffee تستخدمها في حساباتها وإعلاناتها. مفيش حاجة نزلت على صفحات الكريتورز، فالحملة بتتقاس بالمحتوى اللي اتسلّم مش بالمشاهدات.')+'</p></div>';
+    h+='<div class="ckpi">'+[[CR.length,L('Creators','كريتورز')],[V.length,L('Videos delivered','فيديو تم تسليمه')],[(tot/60).toFixed(1),L('Minutes of content','دقيقة محتوى')],[Math.round(tot/V.length)+L('s',' ث'),L('Average length','متوسط مدة الفيديو')],[ig,L('Instagram creators','كريتورز إنستقرام')],[tt,L('TikTok creators','كريتورز تيك توك')]].map(function(x,j){return '<div class="rise d'+Math.min(4,j)+'"><strong>'+x[0]+'</strong><span>'+x[1]+'</span></div>'}).join('')+'</div>';
+    h+='<div class="ugc-note rise d2"><div class="ic"><svg viewBox="0 0 24 24"><path d="M15 10l5-3v10l-5-3z"/><rect x="3" y="6" width="12" height="12" rx="2"/></svg></div><p>'+L('<b>UGC, no posting.</b> Creators filmed product videos for Evan Coffee to use on its own accounts and in ads. Nothing went up on the creators\' pages, so this campaign is measured by the content delivered, not by views.','<b>UGC، بدون نشر.</b> الكريتورز صوّروا فيديوهات للمنتج عشان Evan Coffee تستخدمها في حساباتها وإعلاناتها. ما فيه شي نزل على صفحات الكريتورز، فالحملة تنقاس بالمحتوى اللي تم تسليمه مو بالمشاهدات.')+'</p></div>';
     h+='<section class="tops5"><div class="t5head rise"><span class="kicker">'+L('The videos','الفيديوهات')+'</span><h3>'+L('WATCH THE <span class="red">CONTENT</span>','شوف <span class="red">المحتوى</span>')+'</h3><p>'+L('Tap any video to watch it with sound.','اضغط على أي فيديو وشوفه بالصوت.')+'</p></div><div class="vwall">';
     V.forEach(function(v,j){ h+='<div class="vt" role="button" tabindex="0" data-i="'+j+'" aria-label="Play video '+(j+1)+'"><img src="'+v.p+'" alt="Evan Coffee UGC video '+(j+1)+'" loading="lazy" decoding="async"><span class="pl"><svg viewBox="0 0 24 24"><path d="M7 4.5v15l13-7.5z"/></svg></span><span class="vn">#'+(j+1)+'</span><span class="vd">0:'+String(Math.round(v.d)).padStart(2,'0')+'</span><div class="vw"><span>'+(v.who?'@'+esc(v.who):'Evan Coffee UGC')+'</span><span class="snd"><svg viewBox="0 0 24 24"><path d="M4 9v6h4l5 4V5L8 9z"/><path d="M16 9a4 4 0 0 1 0 6"/></svg></span></div></div>' });
-    h+='<a class="vt vcta" href="https://wa.me/966511460554?text='+encodeURIComponent(L('Hi Trenova, I want UGC videos like the Evan Coffee campaign for my brand.','أهلاً ترينوفا، عايز فيديوهات UGC زي حملة Evan Coffee للبراند بتاعي.'))+'" target="_blank" rel="noopener"><span class="kicker">'+L('Your brand next?','براندك الجاي؟')+'</span><b>'+L('WANT CONTENT LIKE THIS?','عايز محتوى زي ده؟')+'</b><span class="vc-b">'+L('Chat on WhatsApp →','كلّمنا واتساب ←')+'</span></a>';
+    h+='<a class="vt vcta" href="https://wa.me/966511460554?text='+encodeURIComponent(L('Hi Trenova, I want UGC videos like the Evan Coffee campaign for my brand.','أهلاً ترينوفا، أبغى فيديوهات UGC مثل حملة Evan Coffee للبراند حقّي.'))+'" target="_blank" rel="noopener"><span class="kicker">'+L('Your brand next?','براندك الجاي؟')+'</span><b>'+L('WANT CONTENT LIKE THIS?','تبي محتوى مثل هذا؟')+'</b><span class="vc-b">'+L('Chat on WhatsApp →','كلّمنا واتساب ←')+'</span></a>';
     h+='</div></section>';
     h+='<section class="tops5"><div class="t5head rise"><span class="kicker">'+L('The creators','الكريتورز')+'</span><h3>'+L('WHO MADE <span class="red">IT</span>','مين <span class="red">صنعه</span>')+'</h3></div><div class="crgrid">'+CR.map(function(x){return '<a class="crc '+(x.pf==='TikTok'?'tt':'ig')+'" href="'+esc(x.u)+'" target="_blank" rel="noopener"><b>@'+esc(x.h)+'</b><span>'+tw(x.pf)+' ↗</span></a>'}).join('')+'</div></section>';
     h+='<nav class="cnav" aria-label="More campaigns"><a href="#c-'+prev+'" data-r><span>'+L('← Previous','→ السابق')+'</span><b>'+nm(prev)+'</b></a><a href="#c-'+next+'" data-r><span>'+L('Next →','التالي ←')+'</span><b>'+nm(next)+'</b></a></nav>';
@@ -216,8 +216,8 @@
   /* typed roles */
   var typed=document.getElementById('typed');
   if(typed){
-  var LINES={ar:['أكثر من 5 سنين في الإنفلونسر ماركتنج','أكثر من 5,000 كريتور و100 براند','أكثر من 150 مليون مشاهدة','ترينوفا · Lead the Trend','اختيار الكريتورز والتواصل معهم','حملات تيك توك بتجيب نتيجة','شراكات براندات بتدوم']};
-  var lines=['5+ years in influencer marketing','5,000+ creators · 100+ brands','150M+ views generated','Trenova, Lead the Trend','Creator sourcing & outreach','TikTok campaigns that convert','Brand partnerships that last']; LINES.en=lines; if(lang==='ar'){ lines=LINES.ar; typed.textContent=lines[0] }
+  var LINES={ar:['خبرة وكالتنا أكثر من 5 سنين في الإنفلونسر ماركتنج','أكثر من 5,000 كريتور و100 براند','أكثر من 150 مليون مشاهدة','ترينوفا · Lead the Trend','اختيار الكريتورز والتواصل معهم','حملات تيك توك تجيب نتيجة','شراكات براندات تدوم']};
+  var lines=['5+ years of agency experience in influencer marketing','5,000+ creators · 100+ brands','150M+ views generated','Trenova, Lead the Trend','Creator sourcing & outreach','TikTok campaigns that convert','Brand partnerships that last']; LINES.en=lines; if(lang==='ar'){ lines=LINES.ar; typed.textContent=lines[0] }
   onLang.push(function(){ lines=LINES[lang]; typed.textContent=lines[0]; if(typeof li!=='undefined'){ li=0; ci=lines[0].length; del=true } });
   if(!reduce){
     var li=0, ci=lines[0].length, del=true;
@@ -285,8 +285,8 @@
       var t;
       if(lang==='ar'){
         var pa=pl.map(tw), la=pa.length<2?pa.join(''):pa.slice(0,-1).join('، ')+' و'+pa[pa.length-1];
-        t='أهلاً ترينوفا'+(n?'، معاك '+n:'')+(br?' من '+br:'')+'.';
-        t+='\nعايز '+(need?labAr[need]:'مساعدة في الإنفلونسر ماركتنج')+(pa.length?' على '+la:'')+' في السعودية.';
+        t='أهلاً ترينوفا'+(n?'، معك '+n:'')+(br?' من '+br:'')+'.';
+        t+='\nأبغى '+(need?labAr[need]:'مساعدة في الإنفلونسر ماركتنج')+(pa.length?' على '+la:'')+' في السعودية.';
         if(note) t+='\n'+note;
         t+='\nممكن نتكلم؟';
       } else {
