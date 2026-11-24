@@ -273,13 +273,13 @@
   /* message builder (chat) */
   (function(){
     var send=document.getElementById('send'), bub=document.getElementById('bubble'); if(!send) return;
-    var labels={'an influencer campaign':'An influencer campaign','creator sourcing':'Creator sourcing','a campaign report':'A campaign report','part-time influencer support':'Part-time support'};
+    var labels={'a full influencer campaign':'A full influencer campaign','access to our creator network':'Our creator network','campaign reporting and analytics':'Reporting and analytics','a monthly partnership with a dedicated team':'A monthly partnership'};
     function sel(id){ return [].slice.call(document.querySelectorAll('#'+id+' [aria-pressed="true"]')).map(function(b){return b.dataset.v}) }
     function list(a){ return a.length<2?a.join(''):a.slice(0,-1).join(', ')+' and '+a[a.length-1] }
     function build(){
       var n=document.getElementById('f-name').value.trim(), br=document.getElementById('f-brand').value.trim(), note=document.getElementById('f-note').value.trim();
       var need=sel('pk-need')[0], pl=sel('pk-plat');
-      var labAr={'an influencer campaign':'حملة إنفلونسرز','creator sourcing':'اختيار كريتورز','a campaign report':'تقرير حملة','part-time influencer support':'دعم بارت تايم'};
+      var labAr={'a full influencer campaign':'حملة إنفلونسرز كاملة','access to our creator network':'الوصول لشبكة كريتورز','campaign reporting and analytics':'تقارير وتحليلات للحملات','a monthly partnership with a dedicated team':'شراكة شهرية مع فريق مخصص'};
       document.getElementById('ans-need').textContent=need?(lang==='ar'?labAr[need]:labels[need]):'';
       document.getElementById('ans-plat').textContent=pl.map(tw).join(' · ');
       var t;
