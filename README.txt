@@ -9,7 +9,6 @@ Unzip this archive. Upload every HTML file plus the assets and ugc folders to th
 PAGES
 index.html: Home
 about.html: About
-experience.html: Experience
 results.html: Our Campaigns, the single campaign listing
 contact.html: Contact
 campaign-*.html: One detail page for each campaign
