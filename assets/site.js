@@ -130,10 +130,10 @@
     var h='<a class="back" href="#work" data-r>'+L('← Our campaigns','→ حملاتنا')+'</a>';
     h+='<header class="chero rise"><img class="big-lg" src="'+logo+'" alt="'+esc(c.n)+' logo" width="112" height="112"><div><span class="cat">'+esc(M(id,'cat',c.cat))+'</span><h1>'+esc(c.n.toUpperCase())+'</h1><p class="per">'+esc(M(id,'period',c.period))+'</p></div><a class="blink" href="'+c.link+'" target="_blank" rel="noopener">'+esc(c.link.replace(/^https?:\/\/(www\.)?/,''))+' ↗</a></header>';
     h+='<div class="ckpi">'+[[CR.length,L('Creators','كريتورز')],[V.length,L('Videos delivered','فيديو تم تسليمه')],[(tot/60).toFixed(1),L('Minutes of content','دقيقة محتوى')],[Math.round(tot/V.length)+L('s',' ث'),L('Average length','متوسط مدة الفيديو')],[ig,L('Instagram creators','كريتورز إنستقرام')],[tt,L('TikTok creators','كريتورز تيك توك')]].map(function(x,j){return '<div class="rise d'+Math.min(4,j)+'"><strong>'+x[0]+'</strong><span>'+x[1]+'</span></div>'}).join('')+'</div>';
-    h+='<div class="ugc-note rise d2"><div class="ic"><svg viewBox="0 0 24 24"><path d="M15 10l5-3v10l-5-3z"/><rect x="3" y="6" width="12" height="12" rx="2"/></svg></div><p>'+L('<b>UGC, no posting.</b> Creators filmed product videos for Evan Coffee to use on its own accounts and in ads. Nothing went up on the creators\' pages, so this campaign is measured by the content delivered, not by views.','<b>UGC، بدون نشر.</b> الكريتورز صوّروا فيديوهات للمنتج عشان Evan Coffee تستخدمها في حساباتها وإعلاناتها. ما فيه شي نزل على صفحات الكريتورز، فالحملة تنقاس بالمحتوى اللي تم تسليمه مو بالمشاهدات.')+'</p></div>';
-    h+='<section class="tops5"><div class="t5head rise"><span class="kicker">'+L('The videos','الفيديوهات')+'</span><h3>'+L('WATCH THE <span class="red">CONTENT</span>','شوف <span class="red">المحتوى</span>')+'</h3><p>'+L('Tap any video to watch it with sound.','اضغط على أي فيديو وشوفه بالصوت.')+'</p></div><div class="vwall">';
+    h+='<div class="ugc-note rise d2"><div class="ic"><svg viewBox="0 0 24 24"><path d="M15 10l5-3v10l-5-3z"/><rect x="3" y="6" width="12" height="12" rx="2"/></svg></div><p>'+L('<b>UGC, no posting.</b> Creators filmed product videos for Evan Coffee to use on its own accounts and in ads. Nothing went up on the creators\' pages, so this campaign is measured by the content delivered, not by views.','<b>UGC، بدون نشر.</b> صوّر صنّاع المحتوى فيديوهات للمنتج لتستخدمها Evan Coffee في حساباتها وإعلاناتها. لم يُنشر شيء على صفحاتهم، لذا تُقاس الحملة بالمحتوى المُسلَّم لا بالمشاهدات.')+'</p></div>';
+    h+='<section class="tops5"><div class="t5head rise"><span class="kicker">'+L('The videos','الفيديوهات')+'</span><h3>'+L('WATCH THE <span class="red">CONTENT</span>','شوف <span class="red">المحتوى</span>')+'</h3><p>'+L('Tap any video to watch it with sound.','اضغط على أي فيديو لمشاهدته بالصوت.')+'</p></div><div class="vwall">';
     V.forEach(function(v,j){ h+='<div class="vt" role="button" tabindex="0" data-i="'+j+'" aria-label="Play video '+(j+1)+'"><img src="'+v.p+'" alt="Evan Coffee UGC video '+(j+1)+'" loading="lazy" decoding="async"><span class="pl"><svg viewBox="0 0 24 24"><path d="M7 4.5v15l13-7.5z"/></svg></span><span class="vn">#'+(j+1)+'</span><span class="vd">0:'+String(Math.round(v.d)).padStart(2,'0')+'</span><div class="vw"><span>'+(v.who?'@'+esc(v.who):'Evan Coffee UGC')+'</span><span class="snd"><svg viewBox="0 0 24 24"><path d="M4 9v6h4l5 4V5L8 9z"/><path d="M16 9a4 4 0 0 1 0 6"/></svg></span></div></div>' });
-    h+='<a class="vt vcta" href="https://wa.me/966511460554?text='+encodeURIComponent(L('Hi Trenova, I want UGC videos like the Evan Coffee campaign for my brand.','أهلاً ترينوفا، أبغى فيديوهات UGC مثل حملة Evan Coffee للبراند حقّي.'))+'" target="_blank" rel="noopener"><span class="kicker">'+L('Your brand next?','براندك الجاي؟')+'</span><b>'+L('WANT CONTENT LIKE THIS?','تبي محتوى مثل هذا؟')+'</b><span class="vc-b">'+L('Chat on WhatsApp →','كلّمنا واتساب ←')+'</span></a>';
+    h+='<a class="vt vcta" href="https://wa.me/966511460554?text='+encodeURIComponent(L('Hi Trenova, I want UGC videos like the Evan Coffee campaign for my brand.','مرحبًا فريق ترينوفا، نرغب في فيديوهات UGC مماثلة لحملة Evan Coffee لعلامتنا.'))+'" target="_blank" rel="noopener"><span class="kicker">'+L('Your brand next?','علامتك التالية؟')+'</span><b>'+L('WANT CONTENT LIKE THIS?','هل ترغب بمحتوى مماثل؟')+'</b><span class="vc-b">'+L('Chat on WhatsApp →','تواصل عبر واتساب ←')+'</span></a>';
     h+='</div></section>';
     h+='<section class="tops5"><div class="t5head rise"><span class="kicker">'+L('The creators','الكريتورز')+'</span><h3>'+L('WHO MADE <span class="red">IT</span>','مين <span class="red">صنعه</span>')+'</h3></div><div class="crgrid">'+CR.map(function(x){return '<a class="crc '+(x.pf==='TikTok'?'tt':'ig')+'" href="'+esc(x.u)+'" target="_blank" rel="noopener"><b>@'+esc(x.h)+'</b><span>'+tw(x.pf)+' ↗</span></a>'}).join('')+'</div></section>';
     h+='<nav class="cnav" aria-label="More campaigns"><a href="#c-'+prev+'" data-r><span>'+L('← Previous','→ السابق')+'</span><b>'+nm(prev)+'</b></a><a href="#c-'+next+'" data-r><span>'+L('Next →','التالي ←')+'</span><b>'+nm(next)+'</b></a></nav>';
@@ -285,15 +285,15 @@
       var t;
       if(lang==='ar'){
         var pa=pl.map(tw), la=pa.length<2?pa.join(''):pa.slice(0,-1).join('، ')+' و'+pa[pa.length-1];
-        t='أهلاً ترينوفا'+(n?'، معك '+n:'')+(br?' من '+br:'')+'.';
-        t+='\nأبغى '+(need?labAr[need]:'مساعدة في الإنفلونسر ماركتنج')+(pa.length?' على '+la:'')+' في السعودية.';
+        t='السلام عليكم فريق ترينوفا'+(n?'، معكم '+n:'')+(br?' من '+br:'')+'.';
+        t+='\nنرغب في '+(need?labAr[need]:'خدمات التسويق بالمؤثرين')+(pa.length?' على '+la:'')+' في السعودية.';
         if(note) t+='\n'+note;
-        t+='\nممكن نتكلم؟';
+        t+='\nيسعدنا التواصل معكم.';
       } else {
-      t='Hi Trenova'+(n?', this is '+n:'')+(br?' from '+br:'')+'.';
-      t+='\nI\'m looking for '+(need||'help with influencer marketing')+(pl.length?' on '+list(pl):'')+' in Saudi Arabia.';
+      t='Hello Trenova team'+(n?', this is '+n:'')+(br?' from '+br:'')+'.';
+      t+='\nWe\'re looking for '+(need||'help with influencer marketing')+(pl.length?' on '+list(pl):'')+' in Saudi Arabia.';
       if(note) t+='\n'+note;
-      t+='\nCan we talk?';
+      t+='\nCould we schedule a call?';
       }
       bub.textContent=t; send.href='https://wa.me/966511460554?text='+encodeURIComponent(t);
     }
