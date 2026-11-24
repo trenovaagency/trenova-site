@@ -1,7 +1,7 @@
 
 (function(){
   var root=document.documentElement;
-  var PAGE_ROUTES={home:'index.html',about:'about.html',experience:'experience.html',work:'results.html',contact:'contact.html'};
+  var PAGE_ROUTES={home:'index.html',about:'about.html',work:'results.html',contact:'contact.html'};
   function pageURL(route){return PAGE_ROUTES[route]||(route.indexOf('c-')===0?'campaign-'+route.slice(2)+'.html':'index.html')}
   function fixLinks(scope){scope.querySelectorAll('a[href^="#"]').forEach(function(a){var key=a.getAttribute('href').slice(1);if(PAGE_ROUTES[key]||key.indexOf('c-')===0){a.href=pageURL(key);a.removeAttribute('data-r')}})}
 
