@@ -343,6 +343,26 @@
     single('sp-need'); single('sp-budget'); single('sp-when');
     document.querySelectorAll('#sp-plat .pl').forEach(function(b){ b.addEventListener('click',function(){ b.setAttribute('aria-pressed',String(b.getAttribute('aria-pressed')!=='true')); build() }) });
     ['sp-name','sp-brand','sp-city','sp-note'].forEach(function(id){ document.getElementById(id).addEventListener('input',build) });
+    var sub=document.getElementById('sp-submit'), st=document.getElementById('sp-status');
+    if(sub){ sub.addEventListener('click',function(){
+      var n=document.getElementById('sp-name').value.trim(), br=document.getElementById('sp-brand').value.trim();
+      function say(en,ar,ok){ st.textContent=lang==='ar'?ar:en; st.style.color=ok?'#86EFAC':'#FCA5A5' }
+      if(document.getElementById('sp-honey').value){ return }
+      if(!n||!br){ say('Please add your name and brand first.','فضلاً اكتب اسمك واسم البراند أول.',false); return }
+      var need=one('sp-need'), pl=many('sp-plat'), bud=one('sp-budget'), whn=one('sp-when');
+      var fd=new FormData();
+      fd.append('_subject','New project brief: '+br+' ('+n+')');
+      fd.append('_template','table'); fd.append('_captcha','false');
+      fd.append('Name',n); fd.append('Brand',br); fd.append('City',document.getElementById('sp-city').value.trim());
+      fd.append('Service',need.v); fd.append('Platforms',pl.map(function(x){return x.v}).join(', '));
+      fd.append('Budget',bud.v); fd.append('Launch',whn.v); fd.append('Notes',document.getElementById('sp-note').value.trim());
+      fd.append('Full message',bub.textContent); fd.append('Page language',lang);
+      sub.disabled=true; say('Sending...','جاري الإرسال...',true);
+      fetch('https://formsubmit.co/ajax/trenovaagency@gmail.com',{method:'POST',body:fd,headers:{'Accept':'application/json'}})
+        .then(function(r){ return r.json() })
+        .then(function(d){ if(d&&(d.success===true||d.success==='true')){ say('Sent. Our team will get back to you soon.','وصل البريف لفريقنا، بنرجع لك قريب.',true); sub.style.display='none' } else { throw new Error('fail') } })
+        .catch(function(){ sub.disabled=false; say('Could not send. Please use WhatsApp or email below.','ما قدرنا نرسل. فضلاً استخدم الواتساب أو الإيميل تحت.',false) });
+    }) }
     build(); onLang.push(build);
   })();
 
