@@ -358,7 +358,7 @@
       fd.append('Budget',bud.v); fd.append('Launch',whn.v); fd.append('Notes',document.getElementById('sp-note').value.trim());
       fd.append('Full message',bub.textContent); fd.append('Page language',lang);
       sub.disabled=true; say('Sending...','جاري الإرسال...',true);
-      fetch('https://formsubmit.co/ajax/trenovaagency@gmail.com',{method:'POST',body:fd,headers:{'Accept':'application/json'}})
+      var ac=new AbortController(); setTimeout(function(){ac.abort()},15000); fetch('https://formsubmit.co/ajax/trenovaagency@gmail.com',{method:'POST',body:fd,headers:{'Accept':'application/json'},signal:ac.signal})
         .then(function(r){ return r.json() })
         .then(function(d){ if(d&&(d.success===true||d.success==='true')){ say('Sent. Our team will get back to you soon.','وصل البريف لفريقنا، بنرجع لك قريب.',true); sub.style.display='none' } else { throw new Error('fail') } })
         .catch(function(){ sub.disabled=false; say('Could not send. Please use WhatsApp or email below.','ما قدرنا نرسل. فضلاً استخدم الواتساب أو الإيميل تحت.',false) });
