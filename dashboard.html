@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<title>Trenova · Influencer Dashboard</title>
+<style>
+:root{--bg:#0b0816;--bg2:#120d24;--card:#171132;--line:#2a2150;--tx:#f1ecff;--mut:#9d93c4;--p:#7C3AED;--p2:#A78BFA;--pink:#E879F9;--ok:#34d399;--warn:#fbbf24;--bad:#f87171}
+:root.light{--bg:#f6f3ff;--bg2:#fff;--card:#fff;--line:#e2dbf7;--tx:#1b1237;--mut:#6b6290}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--tx);font:15px/1.5 system-ui,"Segoe UI",Tahoma,Arial,sans-serif;min-height:100vh}
+a{color:var(--p2)}button,input,select,textarea{font:inherit;color:inherit}
+.btn{background:linear-gradient(135deg,var(--p),var(--pink));border:0;color:#fff;padding:9px 16px;border-radius:10px;cursor:pointer;font-weight:600}
+.btn.ghost{background:transparent;border:1px solid var(--line);color:var(--tx)}.btn.sm{padding:5px 10px;font-size:13px}.btn.red{background:var(--bad)}
+input,select,textarea{background:var(--bg2);border:1px solid var(--line);border-radius:9px;padding:9px 11px;width:100%}
+label{display:block;font-size:12.5px;color:var(--mut);margin-bottom:4px}
+.top{display:flex;align-items:center;gap:12px;padding:12px 20px;border-bottom:1px solid var(--line);background:var(--bg2);position:sticky;top:0;z-index:5;flex-wrap:wrap}
+.top .lg{font-weight:800;letter-spacing:.08em;color:var(--p2);text-decoration:none}.top .sp{flex:1}
+.tabs{display:flex;gap:6px;flex-wrap:wrap}.tabs button{background:transparent;border:1px solid transparent;padding:7px 14px;border-radius:9px;cursor:pointer;color:var(--mut)}
+.tabs button.on{background:var(--card);border-color:var(--line);color:var(--tx)}
+main{max-width:1200px;margin:0 auto;padding:20px}
+.grid{display:grid;gap:14px}.k4{grid-template-columns:repeat(auto-fit,minmax(200px,1fr))}.g2{grid-template-columns:repeat(auto-fit,minmax(340px,1fr))}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px}
+.kpi b{display:block;font-size:26px;margin-top:4px}.kpi span{color:var(--mut);font-size:13px}
+h2{margin:0 0 12px;font-size:18px}h3{margin:0 0 10px;font-size:15px;color:var(--p2)}
+.bar{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:12px;align-items:end}.bar>*{flex:1;min-width:140px}.bar .btn{flex:0 0 auto}
+.tw{overflow:auto;border:1px solid var(--line);border-radius:12px}table{border-collapse:collapse;width:100%;min-width:760px}
+th,td{padding:10px 12px;text-align:start;border-bottom:1px solid var(--line);white-space:nowrap}th{font-size:12px;color:var(--mut);background:var(--bg2);cursor:pointer;user-select:none}
+tr:last-child td{border-bottom:0}
+.tag{display:inline-block;padding:2px 9px;border-radius:99px;font-size:12px;border:1px solid var(--line)}
+.s-active,.s-live{color:var(--ok);border-color:var(--ok)}.s-pending,.s-planned,.s-contacted{color:var(--warn);border-color:var(--warn)}.s-paused,.s-done,.s-new{color:var(--p2);border-color:var(--p2)}.s-blocked{color:var(--bad);border-color:var(--bad)}
+.modal{position:fixed;inset:0;background:#000a;display:none;align-items:center;justify-content:center;z-index:20;padding:14px}.modal.on{display:flex}
+.modal .box{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:20px;width:100%;max-width:640px;max-height:92vh;overflow:auto}
+.f2{display:grid;grid-template-columns:1fr 1fr;gap:12px}.f2 .w{grid-column:1/-1}
+@media(max-width:560px){.f2{grid-template-columns:1fr}}
+.hide{display:none!important}
+.lock{max-width:380px;margin:12vh auto;text-align:center}.lock .card{padding:26px}
+.rowb{display:flex;gap:8px;align-items:center}.mut{color:var(--mut);font-size:13px}.empty{padding:28px;text-align:center;color:var(--mut)}
+.hbar{display:flex;align-items:center;gap:8px;margin:6px 0;font-size:13px}.hbar i{display:block;height:10px;border-radius:6px;background:linear-gradient(90deg,var(--p),var(--pink))}.hbar span:first-child{width:90px;flex:none}
+.chips{display:flex;gap:6px;flex-wrap:wrap}.chips label{display:inline-flex;gap:5px;align-items:center;margin:0;color:var(--tx);border:1px solid var(--line);border-radius:99px;padding:3px 10px;font-size:13px;cursor:pointer}.chips input{width:auto}
+</style>
+</head>
+<body>
+<div id="lock" class="lock hide"><div class="card"><div style="font-size:34px">🔒</div><h2 id="lkT"></h2><p class="mut" id="lkH"></p><input id="lkP" type="password" autocomplete="off"><div id="lkP2w" class="hide" style="margin-top:8px"><input id="lkP2" type="password" autocomplete="off"></div><p id="lkE" style="color:var(--bad);min-height:20px;margin:8px 0"></p><button class="btn" id="lkB" style="width:100%"></button><p class="mut" style="margin-top:14px"><a href="index.html" data-t="back"></a></p></div></div>
+
+<div id="app" class="hide">
+<div class="top">
+ <a class="lg" href="index.html">TRENOVA</a><span class="mut" data-t="dash"></span>
+ <div class="tabs" id="tabs"></div><span class="sp"></span>
+ <button class="btn ghost sm" id="thm">◐</button><button class="btn ghost sm" id="lng">EN</button><button class="btn ghost sm" id="lockNow" data-t="lockNow"></button>
+</div>
+<main>
+ <section id="v-ov"></section>
+ <section id="v-inf" class="hide"></section>
+ <section id="v-cam" class="hide"></section>
+ <section id="v-set" class="hide"></section>
+</main>
+</div>
+<div class="modal" id="md"><div class="box" id="mb"></div></div>
+
+<script>
+(function(){
+"use strict";
+var T={
+ar:{dash:"لوحة المؤثرين",back:"← الرجوع للموقع",lockNow:"قفل",ov:"نظرة عامة",inf:"المؤثرين",cam:"الحملات",set:"الإعدادات",
+ lkSet:"أنشئ كلمة سر",lkSetH:"أول مرة؟ اختر كلمة سر للوحة. تتخزن على هذا الجهاز فقط.",lkIn:"ادخل كلمة السر",lkInH:"اللوحة خاصة بفريق ترينوفا.",lkGo:"دخول",lkMk:"إنشاء",lkRe:"أعد كتابة كلمة السر",lkShort:"٤ حروف على الأقل",lkNo:"غير متطابقة",lkWrong:"كلمة السر غلط",
+ totInf:"إجمالي المؤثرين",actInf:"نشطين",totReach:"إجمالي المتابعين",actCam:"حملات شغالة",budget:"ميزانية الحملات",spent:"المصروف",avgEng:"متوسط التفاعل",
+ byPlat:"حسب المنصة",byCity:"حسب المدينة",byNiche:"حسب المجال",topInf:"أفضل المؤثرين تفاعلاً",camBud:"الميزانية مقابل المصروف",
+ add:"+ إضافة مؤثر",addC:"+ حملة جديدة",search:"بحث بالاسم أو المعرّف…",all:"الكل",platform:"المنصة",status:"الحالة",niche:"المجال",city:"المدينة",
+ name:"الاسم",handle:"المعرّف",followers:"المتابعين",eng:"التفاعل %",rate:"السعر (ر.س)",phone:"واتساب",notes:"ملاحظات",email:"الإيميل",
+ save:"حفظ",cancel:"إلغاء",del:"حذف",edit:"تعديل",confirmDel:"متأكد من الحذف؟",noInf:"لسه مفيش مؤثرين. أضف أول واحد أو حمّل بيانات تجريبية من الإعدادات.",noCam:"لسه مفيش حملات.",
+ s_active:"نشط",s_pending:"قيد المراجعة",s_contacted:"تم التواصل",s_new:"جديد",s_paused:"موقوف",s_blocked:"محظور",
+ c_planned:"مخطط",c_live:"شغالة",c_done:"منتهية",c_paused:"موقوفة",
+ camName:"اسم الحملة",brand:"العلامة",start:"البداية",end:"النهاية",cBudget:"الميزانية",cSpent:"المصروف",reach:"الوصول",clicks:"النقرات",conv:"التحويلات",team:"المؤثرين المشاركين",
+ wa:"واتساب",count:"عدد",export:"تصدير CSV",importC:"استيراد CSV",backup:"نسخة احتياطية (JSON)",restore:"استرجاع نسخة",sample:"تحميل بيانات تجريبية",reset:"مسح كل البيانات",
+ chgPw:"تغيير كلمة السر",newPw:"كلمة السر الجديدة",setH:"البيانات محفوظة في متصفح هذا الجهاز فقط. خد نسخة احتياطية بشكل دوري، وتقدر تنقلها لأي جهاز بالاسترجاع.",
+ saved:"تم الحفظ",imported:"تم استيراد",rows:"صف",resetQ:"هيتمسح كل شيء من هذا المتصفح. متأكد؟",total:"الإجمالي",roi:"تكلفة النقرة",cpa:"تكلفة التحويل",sort:"ترتيب",
+ pCh:"تم تغيير كلمة السر",none:"—"},
+en:{dash:"Influencer Dashboard",back:"← Back to site",lockNow:"Lock",ov:"Overview",inf:"Influencers",cam:"Campaigns",set:"Settings",
+ lkSet:"Create a passcode",lkSetH:"First time? Pick a passcode. It is stored on this device only.",lkIn:"Enter passcode",lkInH:"This dashboard is private to the Trenova team.",lkGo:"Unlock",lkMk:"Create",lkRe:"Repeat passcode",lkShort:"At least 4 characters",lkNo:"Does not match",lkWrong:"Wrong passcode",
+ totInf:"Total influencers",actInf:"Active",totReach:"Total followers",actCam:"Live campaigns",budget:"Campaign budget",spent:"Spent",avgEng:"Avg. engagement",
+ byPlat:"By platform",byCity:"By city",byNiche:"By niche",topInf:"Top by engagement",camBud:"Budget vs spent",
+ add:"+ Add influencer",addC:"+ New campaign",search:"Search name or handle…",all:"All",platform:"Platform",status:"Status",niche:"Niche",city:"City",
+ name:"Name",handle:"Handle",followers:"Followers",eng:"Engagement %",rate:"Rate (SAR)",phone:"WhatsApp",notes:"Notes",email:"Email",
+ save:"Save",cancel:"Cancel",del:"Delete",edit:"Edit",confirmDel:"Delete this item?",noInf:"No influencers yet. Add the first one or load sample data in Settings.",noCam:"No campaigns yet.",
+ s_active:"Active",s_pending:"Pending",s_contacted:"Contacted",s_new:"New",s_paused:"Paused",s_blocked:"Blocked",
+ c_planned:"Planned",c_live:"Live",c_done:"Done",c_paused:"Paused",
+ camName:"Campaign name",brand:"Brand",start:"Start",end:"End",cBudget:"Budget",cSpent:"Spent",reach:"Reach",clicks:"Clicks",conv:"Conversions",team:"Influencers on this campaign",
+ wa:"WhatsApp",count:"Count",export:"Export CSV",importC:"Import CSV",backup:"Backup (JSON)",restore:"Restore backup",sample:"Load sample data",reset:"Erase all data",
+ chgPw:"Change passcode",newPw:"New passcode",setH:"Data lives in this device's browser only. Back up regularly; restore on any device.",
+ saved:"Saved",imported:"Imported",rows:"rows",resetQ:"This erases everything in this browser. Sure?",total:"Total",roi:"Cost / click",cpa:"Cost / conversion",sort:"Sort",
+ pCh:"Passcode changed",none:"—"}};
+var PL=["TikTok","Instagram","Snapchat","YouTube","X"],IS=["active","pending","contacted","new","paused","blocked"],CS=["planned","live","done","paused"];
+var KEY="trenova_dash_v1",PK="trenova_dash_pw",LK="trenova_dash_lang",TK="trenova_dash_theme";
+var S,lang=localStorage.getItem(LK)||"ar",tab="ov",sess=false,sortK="followers",sortD=-1;
+function $(i){return document.getElementById(i)}
+function t(k){return T[lang][k]!==undefined?T[lang][k]:k}
+function esc(s){return String(s==null?"":s).replace(/[&<>"']/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]})}
+function nf(n){n=+n||0;return n>=1e6?(n/1e6).toFixed(n>=1e7?0:1)+"M":n>=1e3?(n/1e3).toFixed(n>=1e5?0:1)+"K":String(Math.round(n))}
+function fn(n){return (+n||0).toLocaleString(lang==="ar"?"ar-EG":"en-US")}
+function uid(){return Math.random().toString(36).slice(2,9)}
+function load(){try{S=JSON.parse(localStorage.getItem(KEY))}catch(e){}if(!S||!S.inf)S={inf:[],cam:[]}}
+function save(){localStorage.setItem(KEY,JSON.stringify(S))}
+async function hash(s){var b=await crypto.subtle.digest("SHA-256",new TextEncoder().encode("trenova|"+s));return Array.from(new Uint8Array(b)).map(function(x){return x.toString(16).padStart(2,"0")}).join("")}
+function applyLang(){document.documentElement.lang=lang;document.documentElement.dir=lang==="ar"?"rtl":"ltr";$("lng").textContent=lang==="ar"?"EN":"ع";
+ document.querySelectorAll("[data-t]").forEach(function(e){e.textContent=t(e.dataset.t)});
+ var has=!!localStorage.getItem(PK);$("lkT").textContent=t(has?"lkIn":"lkSet");$("lkH").textContent=t(has?"lkInH":"lkSetH");$("lkB").textContent=t(has?"lkGo":"lkMk");$("lkP").placeholder=t(has?"lkIn":"lkSet");$("lkP2").placeholder=t("lkRe");$("lkP2w").classList.toggle("hide",has);
+ var tb=$("tabs");tb.innerHTML="";[["ov","ov"],["inf","inf"],["cam","cam"],["set","set"]].forEach(function(x){var b=document.createElement("button");b.textContent=t(x[1]);b.className=tab===x[0]?"on":"";b.onclick=function(){tab=x[0];render()};tb.appendChild(b)})}
+function render(){applyLang();["ov","inf","cam","set"].forEach(function(k){$("v-"+k).classList.toggle("hide",k!==tab)});({ov:rOv,inf:rInf,cam:rCam,set:rSet})[tab]()}
+function group(arr,f){var m={};arr.forEach(function(x){var k=f(x)||t("none");m[k]=(m[k]||0)+1});return Object.keys(m).map(function(k){return[k,m[k]]}).sort(function(a,b){return b[1]-a[1]})}
+function bars(rows,fmt){if(!rows.length)return'<div class="empty">'+t("none")+'</div>';var mx=Math.max.apply(null,rows.map(function(r){return r[1]}))||1;return rows.slice(0,8).map(function(r){return'<div class="hbar"><span>'+esc(r[0])+'</span><i style="width:'+Math.max(4,r[1]/mx*100)+'%;flex:none;max-width:55%"></i><span>'+(fmt?fmt(r[1]):r[1])+'</span></div>'}).join("")}
+function rOv(){var I=S.inf,C=S.cam,act=I.filter(function(x){return x.status==="active"}).length,reach=I.reduce(function(a,x){return a+(+x.followers||0)},0),
+ eng=I.length?I.reduce(function(a,x){return a+(+x.eng||0)},0)/I.length:0,live=C.filter(function(c){return c.status==="live"}).length,bud=C.reduce(function(a,c){return a+(+c.budget||0)},0),sp=C.reduce(function(a,c){return a+(+c.spent||0)},0);
+ var top=I.slice().sort(function(a,b){return(+b.eng||0)-(+a.eng||0)}).slice(0,6).map(function(x){return[x.name,+x.eng||0]});
+ var cb=C.map(function(c){return[c.name,+c.budget||0,+c.spent||0]}).slice(0,6);
+ function k(l,v){return'<div class="card kpi"><span>'+t(l)+'</span><b>'+v+'</b></div>'}
+ $("v-ov").innerHTML='<div class="grid k4">'+k("totInf",fn(I.length))+k("actInf",fn(act))+k("totReach",nf(reach))+k("avgEng",eng.toFixed(1)+"%")+k("actCam",fn(live))+k("budget",fn(bud))+k("spent",fn(sp))+'</div><div class="grid g2" style="margin-top:14px"><div class="card"><h3>'+t("byPlat")+'</h3>'+bars(group(I,function(x){return x.platform}))+'</div><div class="card"><h3>'+t("byNiche")+'</h3>'+bars(group(I,function(x){return x.niche}))+'</div><div class="card"><h3>'+t("byCity")+'</h3>'+bars(group(I,function(x){return x.city}))+'</div><div class="card"><h3>'+t("topInf")+'</h3>'+bars(top,function(v){return v.toFixed(1)+"%"})+'</div><div class="card"><h3>'+t("camBud")+'</h3>'+(cb.length?cb.map(function(c){var m=Math.max(c[1],c[2],1);return'<div style="margin:8px 0"><div class="mut">'+esc(c[0])+'</div><div class="hbar"><span>'+t("cBudget")+'</span><i style="width:'+c[1]/m*55+'%;flex:none;opacity:.45"></i><span>'+fn(c[1])+'</span></div><div class="hbar"><span>'+t("cSpent")+'</span><i style="width:'+c[2]/m*55+'%;flex:none"></i><span>'+fn(c[2])+'</span></div></div>'}).join(""):'<div class="empty">'+t("noCam")+'</div>')+'</div></div>'}
+function opts(list,sel,pre,all){return(all?'<option value="">'+t("all")+'</option>':"")+list.map(function(v){return'<option value="'+esc(v)+'"'+(v===sel?" selected":"")+'>'+esc(pre?t(pre+v):v)+'</option>'}).join("")}
+var F={q:"",p:"",s:"",n:""};
+function rInf(){var niches=Array.from(new Set(S.inf.map(function(x){return x.niche}).filter(Boolean)));
+ $("v-inf").innerHTML='<div class="bar"><div><label>&nbsp;</label><input id="fq" placeholder="'+esc(t("search"))+'" value="'+esc(F.q)+'"></div><div><label>'+t("platform")+'</label><select id="fp">'+opts(PL,F.p,"",1)+'</select></div><div><label>'+t("status")+'</label><select id="fs">'+opts(IS,F.s,"s_",1)+'</select></div><div><label>'+t("niche")+'</label><select id="fn">'+opts(niches,F.n,"",1)+'</select></div><button class="btn" id="ad">'+t("add")+'</button></div><div id="tb"></div>';
+ $("fq").oninput=function(){F.q=this.value;tbl()};$("fp").onchange=function(){F.p=this.value;tbl()};$("fs").onchange=function(){F.s=this.value;tbl()};$("fn").onchange=function(){F.n=this.value;tbl()};$("ad").onclick=function(){fInf()};tbl()}
+function tbl(){var q=F.q.toLowerCase(),L=S.inf.filter(function(x){return(!q||(x.name+" "+x.handle).toLowerCase().indexOf(q)>-1)&&(!F.p||x.platform===F.p)&&(!F.s||x.status===F.s)&&(!F.n||x.niche===F.n)});
+ L.sort(function(a,b){var A=a[sortK],B=b[sortK];if(["followers","eng","rate"].indexOf(sortK)>-1){A=+A||0;B=+B||0}else{A=String(A||"");B=String(B||"")}return(A>B?1:A<B?-1:0)*sortD});
+ if(!L.length){$("tb").innerHTML='<div class="empty card">'+t("noInf")+'</div>';return}
+ var cols=[["name","name"],["handle","handle"],["platform","platform"],["niche","niche"],["city","city"],["followers","followers"],["eng","eng"],["rate","rate"],["status","status"]];
+ $("tb").innerHTML='<div class="tw"><table><thead><tr>'+cols.map(function(c){return'<th data-k="'+c[0]+'">'+t(c[1])+(sortK===c[0]?(sortD>0?" ▲":" ▼"):"")+'</th>'}).join("")+'<th></th></tr></thead><tbody>'+L.map(function(x){return'<tr><td><b>'+esc(x.name)+'</b></td><td>'+esc(x.handle)+'</td><td>'+esc(x.platform)+'</td><td>'+esc(x.niche)+'</td><td>'+esc(x.city)+'</td><td>'+nf(x.followers)+'</td><td>'+(+x.eng||0).toFixed(1)+'%</td><td>'+fn(x.rate)+'</td><td><span class="tag s-'+x.status+'">'+t("s_"+x.status)+'</span></td><td class="rowb">'+(x.phone?'<a class="btn ghost sm" target="_blank" rel="noopener" href="https://wa.me/'+String(x.phone).replace(/\D/g,"")+'">'+t("wa")+'</a>':"")+'<button class="btn ghost sm" data-e="'+x.id+'">'+t("edit")+'</button></td></tr>'}).join("")+'</tbody></table></div><p class="mut">'+t("total")+": "+L.length+'</p>';
+ $("tb").querySelectorAll("th[data-k]").forEach(function(h){h.onclick=function(){var k=h.dataset.k;if(sortK===k)sortD*=-1;else{sortK=k;sortD=-1}tbl()}});
+ $("tb").querySelectorAll("[data-e]").forEach(function(b){b.onclick=function(){fInf(b.dataset.e)}})}
+function modal(h){$("mb").innerHTML=h;$("md").classList.add("on")}function closeM(){$("md").classList.remove("on")}
+$("md").onclick=function(e){if(e.target===this)closeM()};
+function fld(id,l,v,type,cls){return'<div class="'+(cls||"")+'"><label>'+t(l)+'</label><input id="'+id+'" type="'+(type||"text")+'" value="'+esc(v)+'"'+(type==="number"?' min="0" step="any"':"")+'></div>'}
+function fInf(id){var x=S.inf.find(function(i){return i.id===id})||{status:"new",platform:"TikTok"};
+ modal('<h2>'+t(id?"edit":"add")+'</h2><div class="f2">'+fld("i_name","name",x.name)+fld("i_handle","handle",x.handle)+'<div><label>'+t("platform")+'</label><select id="i_platform">'+opts(PL,x.platform)+'</select></div><div><label>'+t("status")+'</label><select id="i_status">'+opts(IS,x.status,"s_")+'</select></div>'+fld("i_niche","niche",x.niche)+fld("i_city","city",x.city)+fld("i_followers","followers",x.followers,"number")+fld("i_eng","eng",x.eng,"number")+fld("i_rate","rate",x.rate,"number")+fld("i_phone","phone",x.phone)+fld("i_email","email",x.email,"text","w")+'<div class="w"><label>'+t("notes")+'</label><textarea id="i_notes" rows="3">'+esc(x.notes)+'</textarea></div></div><div class="rowb" style="margin-top:16px"><button class="btn" id="sv">'+t("save")+'</button><button class="btn ghost" id="cn">'+t("cancel")+'</button><span class="sp" style="flex:1"></span>'+(id?'<button class="btn red" id="dl">'+t("del")+'</button>':"")+'</div>');
+ $("cn").onclick=closeM;
+ $("sv").onclick=function(){var n=$("i_name").value.trim();if(!n){$("i_name").focus();return}var o={id:id||uid(),name:n,handle:$("i_handle").value.trim(),platform:$("i_platform").value,status:$("i_status").value,niche:$("i_niche").value.trim(),city:$("i_city").value.trim(),followers:+$("i_followers").value||0,eng:+$("i_eng").value||0,rate:+$("i_rate").value||0,phone:$("i_phone").value.trim(),email:$("i_email").value.trim(),notes:$("i_notes").value};
+  var ix=S.inf.findIndex(function(i){return i.id===o.id});if(ix>-1)S.inf[ix]=o;else S.inf.push(o);save();closeM();render()};
+ if(id)$("dl").onclick=function(){if(confirm(t("confirmDel"))){S.inf=S.inf.filter(function(i){return i.id!==id});S.cam.forEach(function(c){c.team=(c.team||[]).filter(function(m){return m!==id})});save();closeM();render()}}}
+function rCam(){var C=S.cam;$("v-cam").innerHTML='<div class="bar"><span class="sp" style="flex:1"></span><button class="btn" id="ac">'+t("addC")+'</button></div>'+(C.length?'<div class="grid g2">'+C.map(function(c){var tm=(c.team||[]).map(function(m){var i=S.inf.find(function(x){return x.id===m});return i?esc(i.name):""}).filter(Boolean).join("، "),cpc=c.clicks?(c.spent/c.clicks).toFixed(2):"-",cpa=c.conv?(c.spent/c.conv).toFixed(2):"-",pct=c.budget?Math.min(100,c.spent/c.budget*100):0;
+ return'<div class="card"><div class="rowb"><h2 style="margin:0;flex:1">'+esc(c.name)+'</h2><span class="tag s-'+c.status+'">'+t("c_"+c.status)+'</span></div><p class="mut">'+esc(c.brand)+' · '+esc(c.start)+' → '+esc(c.end)+'</p><div class="hbar"><span>'+t("cSpent")+'</span><i style="width:'+pct*.5+'%;flex:none"></i><span>'+fn(c.spent)+" / "+fn(c.budget)+'</span></div><p class="mut">'+t("reach")+": "+nf(c.reach)+" · "+t("clicks")+": "+fn(c.clicks)+" · "+t("conv")+": "+fn(c.conv)+"<br>"+t("roi")+": "+cpc+" · "+t("cpa")+": "+cpa+'</p><p class="mut">'+t("team")+": "+(tm||t("none"))+'</p><button class="btn ghost sm" data-c="'+c.id+'">'+t("edit")+'</button></div>'}).join("")+'</div>':'<div class="empty card">'+t("noCam")+'</div>');
+ $("ac").onclick=function(){fCam()};$("v-cam").querySelectorAll("[data-c]").forEach(function(b){b.onclick=function(){fCam(b.dataset.c)}})}
+function fCam(id){var c=S.cam.find(function(i){return i.id===id})||{status:"planned",team:[]};
+ modal('<h2>'+t(id?"edit":"addC")+'</h2><div class="f2">'+fld("c_name","camName",c.name,"text","w")+fld("c_brand","brand",c.brand)+'<div><label>'+t("status")+'</label><select id="c_status">'+opts(CS,c.status,"c_")+'</select></div>'+fld("c_start","start",c.start,"date")+fld("c_end","end",c.end,"date")+fld("c_budget","cBudget",c.budget,"number")+fld("c_spent","cSpent",c.spent,"number")+fld("c_reach","reach",c.reach,"number")+fld("c_clicks","clicks",c.clicks,"number")+fld("c_conv","conv",c.conv,"number")+'<div class="w"><label>'+t("team")+'</label><div class="chips">'+(S.inf.length?S.inf.map(function(i){return'<label><input type="checkbox" value="'+i.id+'"'+((c.team||[]).indexOf(i.id)>-1?" checked":"")+'>'+esc(i.name)+'</label>'}).join(""):'<span class="mut">'+t("noInf")+'</span>')+'</div></div></div><div class="rowb" style="margin-top:16px"><button class="btn" id="sv">'+t("save")+'</button><button class="btn ghost" id="cn">'+t("cancel")+'</button><span style="flex:1"></span>'+(id?'<button class="btn red" id="dl">'+t("del")+'</button>':"")+'</div>');
+ $("cn").onclick=closeM;
+ $("sv").onclick=function(){var n=$("c_name").value.trim();if(!n){$("c_name").focus();return}var o={id:id||uid(),name:n,brand:$("c_brand").value.trim(),status:$("c_status").value,start:$("c_start").value,end:$("c_end").value,budget:+$("c_budget").value||0,spent:+$("c_spent").value||0,reach:+$("c_reach").value||0,clicks:+$("c_clicks").value||0,conv:+$("c_conv").value||0,team:Array.from($("mb").querySelectorAll(".chips input:checked")).map(function(x){return x.value})};
+  var ix=S.cam.findIndex(function(i){return i.id===o.id});if(ix>-1)S.cam[ix]=o;else S.cam.push(o);save();closeM();render()};
+ if(id)$("dl").onclick=function(){if(confirm(t("confirmDel"))){S.cam=S.cam.filter(function(i){return i.id!==id});save();closeM();render()}}}
+function dl(name,mime,txt){var a=document.createElement("a");a.href=URL.createObjectURL(new Blob(["\ufeff"+txt],{type:mime}));a.download=name;document.body.appendChild(a);a.click();setTimeout(function(){a.remove()},500)}
+var HD=["name","handle","platform","niche","city","followers","eng","rate","phone","email","status","notes"];
+function csvE(v){v=String(v==null?"":v);return/[",\n]/.test(v)?'"'+v.replace(/"/g,'""')+'"':v}
+function csvP(s){var r=[],row=[],f="",q=false;s=s.replace(/^\ufeff/,"");for(var i=0;i<s.length;i++){var c=s[i];if(q){if(c==='"'){if(s[i+1]==='"'){f+='"';i++}else q=false}else f+=c}else if(c==='"')q=true;else if(c===","){row.push(f);f=""}else if(c==="\n"||c==="\r"){if(c==="\r"&&s[i+1]==="\n")i++;row.push(f);f="";if(row.length>1||row[0])r.push(row);row=[]}else f+=c}row.push(f);if(row.length>1||row[0])r.push(row);return r}
+function rSet(){var d=function(i,l){return'<button class="btn ghost" id="'+i+'">'+t(l)+'</button>'};
+ $("v-set").innerHTML='<div class="card"><p class="mut">'+t("setH")+'</p><div class="rowb" style="flex-wrap:wrap">'+d("ex","export")+d("im","importC")+d("bk","backup")+d("rs","restore")+d("sm","sample")+'<button class="btn red" id="rz">'+t("reset")+'</button></div><input type="file" id="fl" class="hide"></div><div class="card" style="margin-top:14px;max-width:420px"><h3>'+t("chgPw")+'</h3><input id="np" type="password" placeholder="'+esc(t("newPw"))+'"><div style="margin-top:8px"><button class="btn" id="pc">'+t("save")+'</button></div></div>';
+ var mode="";
+ $("ex").onclick=function(){dl("trenova-influencers.csv","text/csv",[HD.join(",")].concat(S.inf.map(function(x){return HD.map(function(h){return csvE(x[h])}).join(",")})).join("\r\n"))};
+ $("bk").onclick=function(){dl("trenova-dashboard-backup.json","application/json",JSON.stringify(S))};
+ $("im").onclick=function(){mode="csv";$("fl").accept=".csv";$("fl").click()};$("rs").onclick=function(){mode="json";$("fl").accept=".json";$("fl").click()};
+ $("fl").onchange=function(){var f=this.files[0];if(!f)return;var r=new FileReader();r.onload=function(){try{if(mode==="json"){var o=JSON.parse(r.result.replace(/^\ufeff/,""));if(!o.inf||!o.cam)throw 0;S=o;save();alert(t("saved"))}else{var rows=csvP(r.result),h=rows.shift().map(function(x){return x.trim().toLowerCase()}),n=0;rows.forEach(function(v){var o={id:uid(),status:"new",platform:"TikTok"};h.forEach(function(k,i){if(HD.indexOf(k)>-1)o[k]=v[i]});["followers","eng","rate"].forEach(function(k){o[k]=+o[k]||0});if(IS.indexOf(o.status)<0)o.status="new";if(o.name){S.inf.push(o);n++}});save();alert(t("imported")+" "+n+" "+t("rows"))}render()}catch(e){alert("Invalid file")}};r.readAsText(f);this.value=""};
+ $("sm").onclick=function(){var s=[["نورة العتيبي","@noura.style","TikTok","Fashion","Riyadh",480000,5.2,6500,"active"],["سلطان القحطاني","@sultan.eats","Instagram","Food","Jeddah",310000,4.1,4200,"active"],["ريم الدوسري","@reem.beauty","Snapchat","Beauty","Dammam",720000,3.4,9000,"contacted"],["فهد الشهري","@fahad.tech","YouTube","Tech","Riyadh",260000,6.8,5500,"active"],["لمى الغامدي","@lama.travel","Instagram","Travel","Jeddah",150000,5.9,3000,"pending"],["Khaled Alharbi","@khaled.fit","TikTok","Fitness","Madinah",95000,7.4,2200,"new"]];
+  s.forEach(function(x){S.inf.push({id:uid(),name:x[0],handle:x[1],platform:x[2],niche:x[3],city:x[4],followers:x[5],eng:x[6],rate:x[7],status:x[8],phone:"",email:"",notes:""})});
+  S.cam.push({id:uid(),name:"Ramadan 2027 Early Booking",brand:"Sample Brand",status:"live",start:"2026-12-01",end:"2027-01-15",budget:60000,spent:21000,reach:850000,clicks:14200,conv:640,team:S.inf.slice(-6,-3).map(function(i){return i.id})});save();render()};
+ $("rz").onclick=function(){if(confirm(t("resetQ"))){S={inf:[],cam:[]};save();render()}};
+ $("pc").onclick=async function(){var v=$("np").value;if(v.length<4){alert(t("lkShort"));return}localStorage.setItem(PK,await hash(v));$("np").value="";alert(t("pCh"))}}
+function show(){$("lock").classList.add("hide");$("app").classList.remove("hide");load();render()}
+function gate(){applyLang();$("app").classList.add("hide");$("lock").classList.remove("hide");$("lkP").value="";$("lkP2").value="";$("lkE").textContent=""}
+$("lkB").onclick=async function(){var has=localStorage.getItem(PK),p=$("lkP").value;if(has){if(await hash(p)===has){sess=true;sessionStorage.setItem("trenova_dash_ok","1");show()}else $("lkE").textContent=t("lkWrong")}else{if(p.length<4){$("lkE").textContent=t("lkShort");return}if(p!==$("lkP2").value){$("lkE").textContent=t("lkNo");return}localStorage.setItem(PK,await hash(p));sessionStorage.setItem("trenova_dash_ok","1");show()}};
+["lkP","lkP2"].forEach(function(i){$(i).onkeydown=function(e){if(e.key==="Enter")$("lkB").click()}});
+$("lockNow").onclick=function(){sessionStorage.removeItem("trenova_dash_ok");gate()};
+$("lng").onclick=function(){lang=lang==="ar"?"en":"ar";localStorage.setItem(LK,lang);if($("app").classList.contains("hide"))applyLang();else render()};
+$("thm").onclick=function(){var l=document.documentElement.classList.toggle("light");localStorage.setItem(TK,l?"light":"dark")};
+if(localStorage.getItem(TK)==="light")document.documentElement.classList.add("light");
+if(sessionStorage.getItem("trenova_dash_ok")&&localStorage.getItem(PK))show();else gate();
+})();
+</script>
+</body>
+</html>
