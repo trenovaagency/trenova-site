@@ -76,7 +76,7 @@ ar:{dash:"لوحة المؤثرين",back:"← الرجوع للموقع",lockNo
  wa:"واتساب",count:"عدد",export:"تصدير CSV",importC:"استيراد CSV",backup:"نسخة احتياطية (JSON)",restore:"استرجاع نسخة",sample:"تحميل بيانات تجريبية",reset:"مسح كل البيانات",
  chgPw:"تغيير كلمة السر",newPw:"كلمة السر الجديدة",setH:"البيانات محفوظة في متصفح هذا الجهاز فقط. خد نسخة احتياطية بشكل دوري، وتقدر تنقلها لأي جهاز بالاسترجاع.",
  saved:"تم الحفظ",imported:"تم استيراد",rows:"صف",resetQ:"هيتمسح كل شيء من هذا المتصفح. متأكد؟",total:"الإجمالي",roi:"تكلفة النقرة",cpa:"تكلفة التحويل",sort:"ترتيب",
- pCh:"تم تغيير كلمة السر",none:"—"},
+ pCh:"تم تغيير كلمة السر",none:"—",shw:"عرض للعميل",shT:"اعرض المؤثرين على عميل",shH:"اختار المؤثرين، وهيتعمل رابط صفحة عرض تبعته للعميل أو تفتحه قدامه. بيانات التواصل مش بتظهر.",shC:"اسم العميل (اختياري)",shP:"إظهار الأسعار للعميل",shAll:"تحديد الكل",shNone:"إلغاء الكل",shGen:"إنشاء الرابط",shCp:"نسخ الرابط",shOp:"فتح",shCd:"تم النسخ",shLive:"فتح صفحة العرض بكل البيانات (على جهازك فقط)",shSel:"اختار مؤثر واحد على الأقل"},
 en:{dash:"Influencer Dashboard",back:"← Back to site",lockNow:"Lock",ov:"Overview",inf:"Influencers",cam:"Campaigns",set:"Settings",
  lkSet:"Create a passcode",lkSetH:"First time? Pick a passcode. It is stored on this device only.",lkIn:"Enter passcode",lkInH:"This dashboard is private to the Trenova team.",lkGo:"Unlock",lkMk:"Create",lkRe:"Repeat passcode",lkShort:"At least 4 characters",lkNo:"Does not match",lkWrong:"Wrong passcode",
  totInf:"Total influencers",actInf:"Active",totReach:"Total followers",actCam:"Live campaigns",budget:"Campaign budget",spent:"Spent",avgEng:"Avg. engagement",
@@ -90,7 +90,7 @@ en:{dash:"Influencer Dashboard",back:"← Back to site",lockNow:"Lock",ov:"Overv
  wa:"WhatsApp",count:"Count",export:"Export CSV",importC:"Import CSV",backup:"Backup (JSON)",restore:"Restore backup",sample:"Load sample data",reset:"Erase all data",
  chgPw:"Change passcode",newPw:"New passcode",setH:"Data lives in this device's browser only. Back up regularly; restore on any device.",
  saved:"Saved",imported:"Imported",rows:"rows",resetQ:"This erases everything in this browser. Sure?",total:"Total",roi:"Cost / click",cpa:"Cost / conversion",sort:"Sort",
- pCh:"Passcode changed",none:"—"}};
+ pCh:"Passcode changed",none:"—",shw:"Show to client",shT:"Show influencers to a client",shH:"Pick the influencers. You get a showcase page link to send or open in front of the client. Contact details are not included.",shC:"Client name (optional)",shP:"Show prices to client",shAll:"Select all",shNone:"Clear all",shGen:"Create link",shCp:"Copy link",shOp:"Open",shCd:"Copied",shLive:"Open showcase with all data (this device only)",shSel:"Pick at least one influencer"}};
 var PL=["TikTok","Instagram","Snapchat","YouTube","X"],IS=["active","pending","contacted","new","paused","blocked"],CS=["planned","live","done","paused"];
 var KEY="trenova_dash_v1",PK="trenova_dash_pw",LK="trenova_dash_lang",TK="trenova_dash_theme";
 var S,lang=localStorage.getItem(LK)||"ar",tab="ov",sess=false,sortK="followers",sortD=-1;
@@ -119,8 +119,8 @@ function rOv(){var I=S.inf,C=S.cam,act=I.filter(function(x){return x.status==="a
 function opts(list,sel,pre,all){return(all?'<option value="">'+t("all")+'</option>':"")+list.map(function(v){return'<option value="'+esc(v)+'"'+(v===sel?" selected":"")+'>'+esc(pre?t(pre+v):v)+'</option>'}).join("")}
 var F={q:"",p:"",s:"",n:""};
 function rInf(){var niches=Array.from(new Set(S.inf.map(function(x){return x.niche}).filter(Boolean)));
- $("v-inf").innerHTML='<div class="bar"><div><label>&nbsp;</label><input id="fq" placeholder="'+esc(t("search"))+'" value="'+esc(F.q)+'"></div><div><label>'+t("platform")+'</label><select id="fp">'+opts(PL,F.p,"",1)+'</select></div><div><label>'+t("status")+'</label><select id="fs">'+opts(IS,F.s,"s_",1)+'</select></div><div><label>'+t("niche")+'</label><select id="fn">'+opts(niches,F.n,"",1)+'</select></div><button class="btn" id="ad">'+t("add")+'</button></div><div id="tb"></div>';
- $("fq").oninput=function(){F.q=this.value;tbl()};$("fp").onchange=function(){F.p=this.value;tbl()};$("fs").onchange=function(){F.s=this.value;tbl()};$("fn").onchange=function(){F.n=this.value;tbl()};$("ad").onclick=function(){fInf()};tbl()}
+ $("v-inf").innerHTML='<div class="bar"><div><label>&nbsp;</label><input id="fq" placeholder="'+esc(t("search"))+'" value="'+esc(F.q)+'"></div><div><label>'+t("platform")+'</label><select id="fp">'+opts(PL,F.p,"",1)+'</select></div><div><label>'+t("status")+'</label><select id="fs">'+opts(IS,F.s,"s_",1)+'</select></div><div><label>'+t("niche")+'</label><select id="fn">'+opts(niches,F.n,"",1)+'</select></div><button class="btn ghost" id="shw">'+t("shw")+'</button><button class="btn" id="ad">'+t("add")+'</button></div><div id="tb"></div>';
+ $("shw").onclick=function(){fShow()};$("fq").oninput=function(){F.q=this.value;tbl()};$("fp").onchange=function(){F.p=this.value;tbl()};$("fs").onchange=function(){F.s=this.value;tbl()};$("fn").onchange=function(){F.n=this.value;tbl()};$("ad").onclick=function(){fInf()};tbl()}
 function tbl(){var q=F.q.toLowerCase(),L=S.inf.filter(function(x){return(!q||(x.name+" "+x.handle).toLowerCase().indexOf(q)>-1)&&(!F.p||x.platform===F.p)&&(!F.s||x.status===F.s)&&(!F.n||x.niche===F.n)});
  L.sort(function(a,b){var A=a[sortK],B=b[sortK];if(["followers","eng","rate"].indexOf(sortK)>-1){A=+A||0;B=+B||0}else{A=String(A||"");B=String(B||"")}return(A>B?1:A<B?-1:0)*sortD});
  if(!L.length){$("tb").innerHTML='<div class="empty card">'+t("noInf")+'</div>';return}
@@ -131,6 +131,18 @@ function tbl(){var q=F.q.toLowerCase(),L=S.inf.filter(function(x){return(!q||(x.
 function modal(h){$("mb").innerHTML=h;$("md").classList.add("on")}function closeM(){$("md").classList.remove("on")}
 $("md").onclick=function(e){if(e.target===this)closeM()};
 function fld(id,l,v,type,cls){return'<div class="'+(cls||"")+'"><label>'+t(l)+'</label><input id="'+id+'" type="'+(type||"text")+'" value="'+esc(v)+'"'+(type==="number"?' min="0" step="any"':"")+'></div>'}
+
+function enc(o){return btoa(unescape(encodeURIComponent(JSON.stringify(o)))).replace(/\+/g,"-").replace(/\//g,"_").replace(/=+$/,"")}
+function fShow(){var act=S.inf.filter(function(x){return x.status!=="blocked"});
+ modal('<h2>'+t("shT")+'</h2><p class="mut">'+t("shH")+'</p><div class="f2">'+fld("sh_c","shC","","text","w")+'<div class="w"><label style="display:flex;gap:8px;align-items:center;color:var(--tx)"><input type="checkbox" id="sh_p" style="width:auto" checked>'+t("shP")+'</label></div></div><div class="rowb" style="margin:10px 0"><button class="btn ghost sm" id="sh_a">'+t("shAll")+'</button><button class="btn ghost sm" id="sh_n">'+t("shNone")+'</button></div><div class="chips" id="sh_l">'+act.map(function(i){return'<label><input type="checkbox" value="'+i.id+'" checked>'+esc(i.name)+'</label>'}).join("")+'</div><div class="rowb" style="margin-top:16px;flex-wrap:wrap"><button class="btn" id="sh_g">'+t("shGen")+'</button><button class="btn ghost" id="cn">'+t("cancel")+'</button></div><div id="sh_o" style="margin-top:14px"></div>');
+ var bx=function(v){document.querySelectorAll("#sh_l input").forEach(function(c){c.checked=v})};
+ $("sh_a").onclick=function(){bx(true)};$("sh_n").onclick=function(){bx(false)};$("cn").onclick=closeM;
+ $("sh_g").onclick=function(){var ids=Array.from(document.querySelectorAll("#sh_l input:checked")).map(function(c){return c.value});if(!ids.length){alert(t("shSel"));return}
+  var wp=$("sh_p").checked,l=ids.map(function(id){var x=S.inf.find(function(i){return i.id===id});return[x.name,x.handle,x.platform,x.niche,x.city,+x.followers||0,+x.eng||0,wp?(+x.rate||0):0,x.notes||""]});
+  var o={l:l};if($("sh_c").value.trim())o.c=$("sh_c").value.trim();
+  var u=new URL("showcase.html",location.href).href+"#d="+enc(o);
+  $("sh_o").innerHTML='<input id="sh_u" readonly value="'+esc(u)+'"><div class="rowb" style="margin-top:8px"><button class="btn" id="sh_cp">'+t("shCp")+'</button><a class="btn ghost" target="_blank" rel="noopener" href="'+esc(u)+'">'+t("shOp")+'</a></div>';
+  $("sh_cp").onclick=function(){var i=$("sh_u");i.select();try{navigator.clipboard.writeText(u)}catch(e){document.execCommand("copy")}$("sh_cp").textContent=t("shCd")}}}
 function fInf(id){var x=S.inf.find(function(i){return i.id===id})||{status:"new",platform:"TikTok"};
  modal('<h2>'+t(id?"edit":"add")+'</h2><div class="f2">'+fld("i_name","name",x.name)+fld("i_handle","handle",x.handle)+'<div><label>'+t("platform")+'</label><select id="i_platform">'+opts(PL,x.platform)+'</select></div><div><label>'+t("status")+'</label><select id="i_status">'+opts(IS,x.status,"s_")+'</select></div>'+fld("i_niche","niche",x.niche)+fld("i_city","city",x.city)+fld("i_followers","followers",x.followers,"number")+fld("i_eng","eng",x.eng,"number")+fld("i_rate","rate",x.rate,"number")+fld("i_phone","phone",x.phone)+fld("i_email","email",x.email,"text","w")+'<div class="w"><label>'+t("notes")+'</label><textarea id="i_notes" rows="3">'+esc(x.notes)+'</textarea></div></div><div class="rowb" style="margin-top:16px"><button class="btn" id="sv">'+t("save")+'</button><button class="btn ghost" id="cn">'+t("cancel")+'</button><span class="sp" style="flex:1"></span>'+(id?'<button class="btn red" id="dl">'+t("del")+'</button>':"")+'</div>');
  $("cn").onclick=closeM;

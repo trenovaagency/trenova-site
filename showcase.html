@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<title>Trenova · Influencer Selection</title>
+<style>
+:root{--bg:#0b0816;--bg2:#120d24;--card:#171132;--line:#2a2150;--tx:#f1ecff;--mut:#9d93c4;--p:#7C3AED;--p2:#A78BFA;--pink:#E879F9}
+:root.light{--bg:#f6f3ff;--bg2:#fff;--card:#fff;--line:#e2dbf7;--tx:#1b1237;--mut:#6b6290}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--tx);font:15px/1.55 system-ui,"Segoe UI",Tahoma,Arial,sans-serif;min-height:100vh}
+button,input,select{font:inherit;color:inherit}
+.btn{background:linear-gradient(135deg,var(--p),var(--pink));border:0;color:#fff;padding:10px 18px;border-radius:11px;cursor:pointer;font-weight:700;text-decoration:none;display:inline-block}
+.btn.ghost{background:transparent;border:1px solid var(--line);color:var(--tx)}.btn.sm{padding:6px 12px;font-size:13px}
+header{display:flex;align-items:center;gap:12px;padding:14px 20px;border-bottom:1px solid var(--line);background:var(--bg2);flex-wrap:wrap}
+header .lg{font-weight:800;letter-spacing:.1em;color:var(--p2);text-decoration:none;font-size:18px}header .sp{flex:1}
+.hero{text-align:center;padding:36px 16px 10px}.hero h1{margin:0 0 6px;font-size:28px}.hero p{margin:0;color:var(--mut)}
+main{max-width:1150px;margin:0 auto;padding:16px 20px 60px}
+.bar{display:flex;gap:10px;flex-wrap:wrap;margin:18px 0}.bar>*{flex:1;min-width:150px}
+input,select{background:var(--bg2);border:1px solid var(--line);border-radius:10px;padding:10px 12px;width:100%}
+.grid{display:grid;gap:16px;grid-template-columns:repeat(auto-fill,minmax(260px,1fr))}
+.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:18px;display:flex;flex-direction:column;gap:10px}
+.av{width:54px;height:54px;border-radius:50%;background:linear-gradient(135deg,var(--p),var(--pink));display:flex;align-items:center;justify-content:center;font-weight:800;font-size:22px;color:#fff}
+.hd{display:flex;gap:12px;align-items:center}.hd b{font-size:17px;display:block}.hd span{color:var(--mut);font-size:13px;direction:ltr;display:inline-block}
+.tags{display:flex;gap:6px;flex-wrap:wrap}.tag{padding:2px 10px;border-radius:99px;font-size:12px;border:1px solid var(--line);color:var(--p2)}
+.st{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;text-align:center}.st div{background:var(--bg2);border-radius:10px;padding:8px 4px}.st b{display:block;font-size:17px}.st small{color:var(--mut);font-size:11.5px}
+.note{color:var(--mut);font-size:13px;margin:0}
+.empty{text-align:center;color:var(--mut);padding:50px 10px}
+.cta{margin-top:34px;text-align:center;background:var(--card);border:1px solid var(--line);border-radius:18px;padding:26px}.cta h2{margin:0 0 8px}
+.tot{color:var(--mut);margin:0 0 12px;font-size:13px}
+.hide{display:none!important}
+</style>
+</head>
+<body>
+<header><a class="lg" href="index.html">TRENOVA</a><span class="sp"></span><button class="btn ghost sm" id="thm">◐</button><button class="btn ghost sm" id="lng">EN</button></header>
+<div class="hero"><h1 id="h1"></h1><p id="sub"></p></div>
+<main>
+<div class="bar" id="bar"><input id="q"><select id="fp"></select><select id="fn"></select><select id="so"></select></div>
+<p class="tot" id="tot"></p>
+<div class="grid" id="g"></div>
+<div class="cta"><h2 id="ct"></h2><p class="note" id="cs"></p><p style="margin-top:14px"><a class="btn" id="wa" target="_blank" rel="noopener"></a> <a class="btn ghost" href="start-project.html" id="sp"></a></p></div>
+</main>
+<script>
+(function(){
+"use strict";
+var T={ar:{h1:"ترشيحات المؤثرين من ترينوفا",sub:"مؤثرين مختارين بعناية لعلامتك في السوق السعودي",q:"بحث بالاسم أو المعرّف…",all:"الكل",plat:"المنصة",niche:"المجال",foll:"متابعين",eng:"تفاعل",rate:"السعر",sar:"ر.س",
+ s0:"الأكثر متابعين",s1:"الأعلى تفاعلاً",s2:"الأقل سعراً",tot:"عدد المرشحين: ",empty:"مفيش قائمة مرفقة بالرابط ده. اطلب من فريق ترينوفا رابط القائمة.",ct:"عجبك مؤثر؟",cs:"قولنا مين اخترت ونرتب لك الحملة.",wa:"كلمنا على واتساب",sp:"ابدأ مشروعك",
+ msg:"أهلاً ترينوفا، اخترت من قائمة المؤثرين: ",msg0:"أهلاً ترينوفا، عايز أعرف أكثر عن المؤثرين.",price:"السعر للمنشور"},
+en:{h1:"Influencer picks from Trenova",sub:"Creators selected for your brand in the Saudi market",q:"Search name or handle…",all:"All",plat:"Platform",niche:"Niche",foll:"Followers",eng:"Engagement",rate:"Price",sar:"SAR",
+ s0:"Most followers",s1:"Highest engagement",s2:"Lowest price",tot:"Creators: ",empty:"This link has no list attached. Ask the Trenova team for your list link.",ct:"Like someone?",cs:"Tell us who you picked and we will set up the campaign.",wa:"Chat on WhatsApp",sp:"Start a project",
+ msg:"Hi Trenova, I picked from the influencer list: ",msg0:"Hi Trenova, I would like to know more about your influencers.",price:"Price per post"}};
+var lang=localStorage.getItem("trenova_dash_lang")||"ar",L=[],meta={};
+function $(i){return document.getElementById(i)}function t(k){return T[lang][k]}
+function esc(s){return String(s==null?"":s).replace(/[&<>"']/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]})}
+function nf(n){n=+n||0;return n>=1e6?(n/1e6).toFixed(n>=1e7?0:1)+"M":n>=1e3?(n/1e3).toFixed(n>=1e5?0:1)+"K":String(Math.round(n))}
+function dec(s){s=s.replace(/-/g,"+").replace(/_/g,"/");while(s.length%4)s+="=";return JSON.parse(decodeURIComponent(escape(atob(s))))}
+function load(){var h=location.hash.replace(/^#/,"");
+ if(h.indexOf("d=")===0){try{var o=dec(h.slice(2));meta=o;L=(o.l||[]).map(function(a){return{name:a[0],handle:a[1],platform:a[2],niche:a[3],city:a[4],followers:a[5],eng:a[6],rate:a[7],notes:a[8]}})}catch(e){}}
+ else if(h==="local"){try{var S=JSON.parse(localStorage.getItem("trenova_dash_v1"));meta={p:1};L=(S.inf||[]).filter(function(x){return x.status!=="blocked"})}catch(e){}}}
+function opts(el,list){el.innerHTML='<option value="">'+esc(el.dataset.l)+": "+t("all")+'</option>'+list.map(function(v){return'<option>'+esc(v)+'</option>'}).join("")}
+function uniq(k){return Array.from(new Set(L.map(function(x){return x[k]}).filter(Boolean)))}
+function draw(){var q=$("q").value.toLowerCase(),p=$("fp").value,n=$("fn").value,s=$("so").value,hasP=L.some(function(x){return +x.rate});
+ var R=L.filter(function(x){return(!q||(x.name+" "+x.handle).toLowerCase().indexOf(q)>-1)&&(!p||x.platform===p)&&(!n||x.niche===n)});
+ R.sort(function(a,b){return s==="1"?(+b.eng||0)-(+a.eng||0):s==="2"?(+a.rate||1e12)-(+b.rate||1e12):(+b.followers||0)-(+a.followers||0)});
+ $("tot").textContent=L.length?t("tot")+R.length:"";
+ if(!L.length){$("g").innerHTML='<div class="empty" style="grid-column:1/-1">'+t("empty")+'</div>';return}
+ $("g").innerHTML=R.map(function(x){return'<div class="card"><div class="hd"><div class="av">'+esc((x.name||"?").trim().charAt(0))+'</div><div><b>'+esc(x.name)+'</b><span>'+esc(x.handle)+'</span></div></div><div class="tags">'+[x.platform,x.niche,x.city].filter(Boolean).map(function(v){return'<span class="tag">'+esc(v)+'</span>'}).join("")+'</div><div class="st"><div><b>'+nf(x.followers)+'</b><small>'+t("foll")+'</small></div><div><b>'+(+x.eng||0).toFixed(1)+'%</b><small>'+t("eng")+'</small></div>'+(+x.rate?'<div><b>'+(+x.rate).toLocaleString(lang==="ar"?"ar-EG":"en-US")+'</b><small>'+t("sar")+'</small></div>':'<div><b>-</b><small>'+t("rate")+'</small></div>')+'</div>'+(x.notes?'<p class="note">'+esc(x.notes)+'</p>':"")+'</div>'}).join("");
+ $("so").querySelector('[value="2"]').hidden=!hasP}
+function ui(){document.documentElement.lang=lang;document.documentElement.dir=lang==="ar"?"rtl":"ltr";$("lng").textContent=lang==="ar"?"EN":"ع";
+ $("h1").textContent=meta.c?(lang==="ar"?"ترشيحات ترينوفا لـ ":"Trenova picks for ")+meta.c:t("h1");$("sub").textContent=t("sub");$("q").placeholder=t("q");
+ var pv=$("fp").value,nv=$("fn").value,sv=$("so").value;$("fp").dataset.l=t("plat");$("fn").dataset.l=t("niche");opts($("fp"),uniq("platform"));opts($("fn"),uniq("niche"));$("fp").value=pv;$("fn").value=nv;
+ $("so").innerHTML='<option value="0">'+t("s0")+'</option><option value="1">'+t("s1")+'</option><option value="2">'+t("s2")+'</option>';$("so").value=sv||"0";
+ $("ct").textContent=t("ct");$("cs").textContent=t("cs");$("wa").textContent=t("wa");$("sp").textContent=t("sp");
+ $("wa").href="https://wa.me/966511460554?text="+encodeURIComponent(t("msg0"));draw()}
+["q","fp","fn","so"].forEach(function(i){$(i).oninput=draw;$(i).onchange=draw});
+$("lng").onclick=function(){lang=lang==="ar"?"en":"ar";localStorage.setItem("trenova_dash_lang",lang);ui()};
+$("thm").onclick=function(){var l=document.documentElement.classList.toggle("light");localStorage.setItem("trenova_dash_theme",l?"light":"dark")};
+if(localStorage.getItem("trenova_dash_theme")==="light")document.documentElement.classList.add("light");
+window.addEventListener("hashchange",function(){load();ui()});load();ui();
+})();
+</script>
+</body>
+</html>
