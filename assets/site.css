@@ -1076,3 +1076,6 @@ a.fab::before{content:"Contact us";position:static;display:block}
 html[lang=ar] a.fab::before{content:"تواصل معنا"}
 a.fab::after,a.fab:hover::after{display:none;content:none}
 @media (max-width:700px){a.fab{width:auto;height:auto;padding:.7rem 1.05rem;font-size:.85rem}}
+
+.sp-mail{justify-self:end;font-size:.85rem;opacity:.75;text-decoration:underline;text-underline-offset:3px;transition:opacity .3s}
+.sp-mail:hover{opacity:1}

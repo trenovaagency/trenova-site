@@ -303,6 +303,49 @@
     build(); onLang.push(build);
   })();
 
+  /* project brief builder (start-project page) */
+  (function(){
+    var send=document.getElementById('sp-send'); if(!send) return;
+    var mail=document.getElementById('sp-mail'), bub=document.getElementById('sp-bubble');
+    function one(id){ var b=document.querySelector('#'+id+' [aria-pressed="true"]'); return b?{v:b.dataset.v||'',a:b.dataset.va||''}:{v:'',a:''} }
+    function many(id){ return [].slice.call(document.querySelectorAll('#'+id+' [aria-pressed="true"]')).map(function(b){ return {v:b.dataset.v||'',a:b.dataset.va||''} }) }
+    function joinEn(a){ return a.length<2?a.join(''):a.slice(0,-1).join(', ')+' and '+a[a.length-1] }
+    function joinAr(a){ return a.length<2?a.join(''):a.slice(0,-1).join('، ')+' و'+a[a.length-1] }
+    function build(){
+      var n=document.getElementById('sp-name').value.trim(), br=document.getElementById('sp-brand').value.trim(), c=document.getElementById('sp-city').value.trim(), note=document.getElementById('sp-note').value.trim();
+      var need=one('sp-need'), pl=many('sp-plat'), bud=one('sp-budget'), whn=one('sp-when');
+      var t, lines=[];
+      if(lang==='ar'){
+        t='أهلاً ترينوفا'+(n?'، معك '+n:'')+(br?' من '+br:'')+'.';
+        if(need.a) lines.push('الخدمة: '+need.a);
+        if(pl.length) lines.push('المنصات: '+joinAr(pl.map(function(x){return x.a})));
+        if(bud.a) lines.push('الميزانية التقريبية: '+bud.a);
+        if(whn.a) lines.push('الإطلاق: '+whn.a);
+        if(c) lines.push('المدينة: '+c);
+        if(note) lines.push(note);
+        lines.push('ممكن نتكلم؟');
+      } else {
+        t='Hi Trenova'+(n?', this is '+n:'')+(br?' from '+br:'')+'.';
+        if(need.v) lines.push('Service: '+need.v);
+        if(pl.length) lines.push('Platforms: '+joinEn(pl.map(function(x){return x.v})));
+        if(bud.v) lines.push('Rough budget: '+bud.v);
+        if(whn.v) lines.push('Launch: '+whn.v);
+        if(c) lines.push('City: '+c);
+        if(note) lines.push(note);
+        lines.push('Can we talk?');
+      }
+      t+='\n'+lines.join('\n');
+      bub.textContent=t;
+      send.href='https://wa.me/966511460554?text='+encodeURIComponent(t);
+      if(mail) mail.href='mailto:trenovaagency@gmail.com?subject='+encodeURIComponent((lang==='ar'?'بريف مشروع':'Project brief')+(br?' — '+br:''))+'&body='+encodeURIComponent(t);
+    }
+    function single(id){ document.querySelectorAll('#'+id+' [aria-pressed]').forEach(function(b){ b.addEventListener('click',function(){ document.querySelectorAll('#'+id+' [aria-pressed]').forEach(function(x){ x.setAttribute('aria-pressed',String(x===b)) }); build() }) }) }
+    single('sp-need'); single('sp-budget'); single('sp-when');
+    document.querySelectorAll('#sp-plat .pl').forEach(function(b){ b.addEventListener('click',function(){ b.setAttribute('aria-pressed',String(b.getAttribute('aria-pressed')!=='true')); build() }) });
+    ['sp-name','sp-brand','sp-city','sp-note'].forEach(function(id){ document.getElementById(id).addEventListener('input',build) });
+    build(); onLang.push(build);
+  })();
+
   /* scroll progress */
   var prog=document.getElementById('prog');
   addEventListener('scroll',function(){ var h=document.documentElement.scrollHeight-innerHeight; prog.style.transform='scaleX('+(h>0?scrollY/h:0)+')' },{passive:true});
