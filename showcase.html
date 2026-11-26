@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html lang="en" dir="ltr">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
@@ -51,7 +51,7 @@ var T={ar:{h1:"ترشيحات المؤثرين من ترينوفا",sub:"مؤث�
 en:{h1:"Influencer picks from Trenova",sub:"Creators selected for your brand in the Saudi market",q:"Search name or handle…",all:"All",plat:"Platform",niche:"Niche",foll:"Followers",eng:"Engagement",rate:"Price",sar:"SAR",
  s0:"Most followers",s1:"Highest engagement",s2:"Lowest price",tot:"Creators: ",empty:"This link has no list attached. Ask the Trenova team for your list link.",ct:"Like someone?",cs:"Tell us who you picked and we will set up the campaign.",wa:"Chat on WhatsApp",sp:"Start a project",
  msg:"Hi Trenova, I picked from the influencer list: ",msg0:"Hi Trenova, I would like to know more about your influencers.",price:"Price per post"}};
-var lang=localStorage.getItem("trenova_dash_lang")||"ar",L=[],meta={};
+var lang=localStorage.getItem("trenova_dash_lang")||"en",L=[],meta={};
 function $(i){return document.getElementById(i)}function t(k){return T[lang][k]}
 function esc(s){return String(s==null?"":s).replace(/[&<>"']/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]})}
 function nf(n){n=+n||0;return n>=1e6?(n/1e6).toFixed(n>=1e7?0:1)+"M":n>=1e3?(n/1e3).toFixed(n>=1e5?0:1)+"K":String(Math.round(n))}
