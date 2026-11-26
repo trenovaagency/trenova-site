@@ -21,7 +21,8 @@ main{max-width:1150px;margin:0 auto;padding:16px 20px 60px}
 input,select{background:var(--bg2);border:1px solid var(--line);border-radius:10px;padding:10px 12px;width:100%}
 .grid{display:grid;gap:16px;grid-template-columns:repeat(auto-fill,minmax(260px,1fr))}
 .card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:18px;display:flex;flex-direction:column;gap:10px}
-.av{width:54px;height:54px;border-radius:50%;background:linear-gradient(135deg,var(--p),var(--pink));display:flex;align-items:center;justify-content:center;font-weight:800;font-size:22px;color:#fff}
+.av{position:relative;overflow:hidden;flex:none;width:54px;height:54px;border-radius:50%;background:linear-gradient(135deg,var(--p),var(--pink));display:flex;align-items:center;justify-content:center;font-weight:800;font-size:22px;color:#fff}
+.av img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
 .hd{display:flex;gap:12px;align-items:center}.hd b{font-size:17px;display:block}.hd span{color:var(--mut);font-size:13px;direction:ltr;display:inline-block}
 .tags{display:flex;gap:6px;flex-wrap:wrap}.tag{padding:2px 10px;border-radius:99px;font-size:12px;border:1px solid var(--line);color:var(--p2)}
 .st{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;text-align:center}.st div{background:var(--bg2);border-radius:10px;padding:8px 4px}.st b{display:block;font-size:17px}.st small{color:var(--mut);font-size:11.5px}
@@ -56,7 +57,7 @@ function esc(s){return String(s==null?"":s).replace(/[&<>"']/g,function(c){retur
 function nf(n){n=+n||0;return n>=1e6?(n/1e6).toFixed(n>=1e7?0:1)+"M":n>=1e3?(n/1e3).toFixed(n>=1e5?0:1)+"K":String(Math.round(n))}
 function dec(s){s=s.replace(/-/g,"+").replace(/_/g,"/");while(s.length%4)s+="=";return JSON.parse(decodeURIComponent(escape(atob(s))))}
 function load(){var h=location.hash.replace(/^#/,"");
- if(h.indexOf("d=")===0){try{var o=dec(h.slice(2));meta=o;L=(o.l||[]).map(function(a){return{name:a[0],handle:a[1],platform:a[2],niche:a[3],city:a[4],followers:a[5],eng:a[6],rate:a[7],notes:a[8]}})}catch(e){}}
+ if(h.indexOf("d=")===0){try{var o=dec(h.slice(2));meta=o;L=(o.l||[]).map(function(a){return{name:a[0],handle:a[1],platform:a[2],niche:a[3],city:a[4],followers:a[5],eng:a[6],rate:a[7],notes:a[8],photo:a[9]}})}catch(e){}}
  else if(h==="local"){try{var S=JSON.parse(localStorage.getItem("trenova_dash_v1"));meta={p:1};L=(S.inf||[]).filter(function(x){return x.status!=="blocked"})}catch(e){}}}
 function opts(el,list){el.innerHTML='<option value="">'+esc(el.dataset.l)+": "+t("all")+'</option>'+list.map(function(v){return'<option>'+esc(v)+'</option>'}).join("")}
 function uniq(k){return Array.from(new Set(L.map(function(x){return x[k]}).filter(Boolean)))}
@@ -65,7 +66,7 @@ function draw(){var q=$("q").value.toLowerCase(),p=$("fp").value,n=$("fn").value
  R.sort(function(a,b){return s==="1"?(+b.eng||0)-(+a.eng||0):s==="2"?(+a.rate||1e12)-(+b.rate||1e12):(+b.followers||0)-(+a.followers||0)});
  $("tot").textContent=L.length?t("tot")+R.length:"";
  if(!L.length){$("g").innerHTML='<div class="empty" style="grid-column:1/-1">'+t("empty")+'</div>';return}
- $("g").innerHTML=R.map(function(x){return'<div class="card"><div class="hd"><div class="av">'+esc((x.name||"?").trim().charAt(0))+'</div><div><b>'+esc(x.name)+'</b><span>'+esc(x.handle)+'</span></div></div><div class="tags">'+[x.platform,x.niche,x.city].filter(Boolean).map(function(v){return'<span class="tag">'+esc(v)+'</span>'}).join("")+'</div><div class="st"><div><b>'+nf(x.followers)+'</b><small>'+t("foll")+'</small></div><div><b>'+(+x.eng||0).toFixed(1)+'%</b><small>'+t("eng")+'</small></div>'+(+x.rate?'<div><b>'+(+x.rate).toLocaleString(lang==="ar"?"ar-EG":"en-US")+'</b><small>'+t("sar")+'</small></div>':'<div><b>-</b><small>'+t("rate")+'</small></div>')+'</div>'+(x.notes?'<p class="note">'+esc(x.notes)+'</p>':"")+'</div>'}).join("");
+ $("g").innerHTML=R.map(function(x){return'<div class="card"><div class="hd"><div class="av">'+(x.photo&&/^https?:\/\//i.test(x.photo)?'<img src="'+esc(x.photo)+'" alt="" referrerpolicy="no-referrer" loading="lazy" onerror="this.remove()">':'')+esc((x.name||"?").trim().charAt(0))+'</div><div><b>'+esc(x.name)+'</b><span>'+esc(x.handle)+'</span></div></div><div class="tags">'+[x.platform,x.niche,x.city].filter(Boolean).map(function(v){return'<span class="tag">'+esc(v)+'</span>'}).join("")+'</div><div class="st"><div><b>'+nf(x.followers)+'</b><small>'+t("foll")+'</small></div><div><b>'+(+x.eng||0).toFixed(1)+'%</b><small>'+t("eng")+'</small></div>'+(+x.rate?'<div><b>'+(+x.rate).toLocaleString(lang==="ar"?"ar-EG":"en-US")+'</b><small>'+t("sar")+'</small></div>':'<div><b>-</b><small>'+t("rate")+'</small></div>')+'</div>'+(x.notes?'<p class="note">'+esc(x.notes)+'</p>':"")+'</div>'}).join("");
  $("so").querySelector('[value="2"]').hidden=!hasP}
 function ui(){document.documentElement.lang=lang;document.documentElement.dir=lang==="ar"?"rtl":"ltr";$("lng").textContent=lang==="ar"?"EN":"ع";
  $("h1").textContent=meta.c?(lang==="ar"?"ترشيحات ترينوفا لـ ":"Trenova picks for ")+meta.c:t("h1");$("sub").textContent=t("sub");$("q").placeholder=t("q");
